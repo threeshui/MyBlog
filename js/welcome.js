@@ -7,9 +7,9 @@ function welcome(){
     }
     swal({
         title: " 欢迎！",
-        text: welcome_text+'\n打开页面下方音乐以获得更佳体验！',
+        text: welcome_text+'\n请大家打开声音获取更好的体验！',
         imageUrl: "/img/head.jpg",
-        timer: 3000,
+        timer: 1500,
         showConfirmButton: false
     });
 }
