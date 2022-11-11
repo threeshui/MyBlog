@@ -1,0 +1,146 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Git推送本地到库鉴权失败 | Maxenton</title><meta name="author" content="Maxenton"><meta name="copyright" content="Maxenton"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="Git推送本地到库鉴权失败解决方法。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git推送本地到库鉴权失败">
+<meta property="og:url" content="https://threeshui.github.io/2022/11/10/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/index.html">
+<meta property="og:site_name" content="Maxenton">
+<meta property="og:description" content="Git推送本地到库鉴权失败解决方法。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://threeshui.github.io/img/git_img.png">
+<meta property="article:published_time" content="2022-11-10T10:18:00.941Z">
+<meta property="article:modified_time" content="2022-11-11T08:26:36.746Z">
+<meta property="article:author" content="Maxenton">
+<meta property="article:tag" content="答疑">
+<meta property="article:tag" content="Git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://threeshui.github.io/img/git_img.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://threeshui.github.io/2022/11/10/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2ec9fa90a95a4d6f2c1057f31b412d4a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Maxenton","link":"链接: ","source":"来源: Maxenton","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Git推送本地到库鉴权失败',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-11 16:26:36'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/custom.css"><script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/git_img.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Maxenton</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Git推送本地到库鉴权失败</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-11-10T10:18:00.941Z" title="发表于 2022-11-10 18:18:00">2022-11-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-11T08:26:36.746Z" title="更新于 2022-11-11 16:26:36">2022-11-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AD%94%E7%96%91/">答疑</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%AD%94%E7%96%91/Git/">Git</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">323</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>1分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Git推送本地到库鉴权失败"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://img-blog.csdnimg.cn/434f828d4aea4cb293afbbe3155dd0d1.png" alt="在这里插入图片描述"></p>
+<h1 id="一、记录"><a href="#一、记录" class="headerlink" title="一、记录"></a>一、记录</h1><p>在学习git的时候，从本地仓库推送到远程的时候，出现了上图提示，刚开始没细看，以为是账号密码错误，输了好多次还是这样，我才定睛一看，原来是在2021年8月13日移除了密码认证，请登录该网址查看详细内容。<br>在网上找了找，大概就是需要加一个个人的token，而且设置期限。<br>#		二、解决<br>##		1、登录github，找到个人设置：<br><img src="https://img-blog.csdnimg.cn/52b04a8cc86f40b793341be11c43608c.png" alt="在这里插入图片描述"><br>翻到最下面，找到开发者设置：<br><img src="https://img-blog.csdnimg.cn/938a3f7886304cafbe7398a2c7c327d6.png" alt="在这里插入图片描述"><br>进入后，选择个人token，然后生成一个新的token：<br><img src="https://img-blog.csdnimg.cn/093571e0c6f741e5a8155279b1536bae.png" alt="在这里插入图片描述"><br>验证密码后，进入这个页面，填好需要填的：<br><img src="https://img-blog.csdnimg.cn/7a8c9b87f668427f9cccbaa0c35118a4.png" alt="在这里插入图片描述"><br>然后就会生成一个token：<br><img src="https://img-blog.csdnimg.cn/597d690bec774f20894d4d971a22f4e7.png" alt="在这里插入图片描述"><br>复制好，建议保存，然后git的时候，提示输入用户名和密码，用户名还是你的用户名，密码填这个，然后就发现推送成功了。<br>如果提示：远程仓库包含您本地尚不存在的提交。<br><img src="https://img-blog.csdnimg.cn/fd4265c8ccb3432d9db6f7481ddc8efb.png" alt="在这里插入图片描述"></p>
+<p>第一种方法：强制推送<br>强制上传输入命令： git push -u origin +master<br>第二种方法：先同步远程到本地，然后再推送：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git fetch origin https://github.com/threeshui/SomePoc.git</span><br><span class="line">git merge origin/master //获取远程更新</span><br><span class="line">git push origin master  //把更新的内容合并到本地分支</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/f37bb169277b4ae0970be5c8db7544f5.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/be42a9a71d8a4339a322955b13bd43a6.png" alt="在这里插入图片描述"></p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://threeshui.github.io">Maxenton</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://threeshui.github.io/2022/11/10/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/">https://threeshui.github.io/2022/11/10/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://threeshui.github.io" target="_blank">Maxenton</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AD%94%E7%96%91/">答疑</a><a class="post-meta__tags" href="/tags/Git/">Git</a></div><div class="post_share"><div class="social-share" data-image="/img/git_img.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/11/10/Socket%E7%BC%96%E7%A8%8B%EF%BC%88%E5%81%8F%E5%AE%89%E5%85%A8%E6%96%B9%E9%9D%A2%EF%BC%89/"><img class="prev-cover" src="/img/socket.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Socket编程（偏安全方面）</div></div></a></div><div class="next-post pull-right"><a href="/2022/11/10/%E5%88%9D%E8%AF%86pocsuite3%E6%A1%86%E6%9E%B6/"><img class="next-cover" src="/img/poc.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">初始PocSuite3框架</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/11/10/Yunzai-Bot%E6%8F%92%E4%BB%B6%E4%B8%ADpip%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93%E6%8A%A5%E9%94%99/" title="Yunzai-Bot插件中pip命令安装报错"><img class="cover" src="/img/yunzai_img.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-11-10</div><div class="title">Yunzai-Bot插件中pip命令安装报错</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Maxenton</div><div class="author-info__description">一个啥都只会一点的白帽子</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">10</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">13</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">13</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15131581?spm=1030.2200.3001.5343"><i class="fab fa-cuttlefish"></i><span>CSDN欢迎关注</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/threeshui" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:peiyimiao@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_15131581?spm=1030.2200.3001.5343" target="_blank" title=""><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到这里，愿君所遇即所爱！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E8%AE%B0%E5%BD%95"><span class="toc-number">1.</span> <span class="toc-text">一、记录</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/11/10/%E9%92%93%E9%B1%BC%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99/" title="钓鱼软件的编写"><img src="/img/fishing.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="钓鱼软件的编写"/></a><div class="content"><a class="title" href="/2022/11/10/%E9%92%93%E9%B1%BC%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99/" title="钓鱼软件的编写">钓鱼软件的编写</a><time datetime="2022-11-10T10:19:02.194Z" title="发表于 2022-11-10 18:19:02">2022-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/10/%E5%85%8D%E6%9D%80/" title="免杀"><img src="/img/miansha.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="免杀"/></a><div class="content"><a class="title" href="/2022/11/10/%E5%85%8D%E6%9D%80/" title="免杀">免杀</a><time datetime="2022-11-10T10:18:18.577Z" title="发表于 2022-11-10 18:18:18">2022-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/10/Socket%E7%BC%96%E7%A8%8B%EF%BC%88%E5%81%8F%E5%AE%89%E5%85%A8%E6%96%B9%E9%9D%A2%EF%BC%89/" title="Socket编程（偏安全方面）"><img src="/img/socket.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Socket编程（偏安全方面）"/></a><div class="content"><a class="title" href="/2022/11/10/Socket%E7%BC%96%E7%A8%8B%EF%BC%88%E5%81%8F%E5%AE%89%E5%85%A8%E6%96%B9%E9%9D%A2%EF%BC%89/" title="Socket编程（偏安全方面）">Socket编程（偏安全方面）</a><time datetime="2022-11-10T10:18:07.687Z" title="发表于 2022-11-10 18:18:07">2022-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/10/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/" title="Git推送本地到库鉴权失败"><img src="/img/git_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git推送本地到库鉴权失败"/></a><div class="content"><a class="title" href="/2022/11/10/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/" title="Git推送本地到库鉴权失败">Git推送本地到库鉴权失败</a><time datetime="2022-11-10T10:18:00.941Z" title="发表于 2022-11-10 18:18:00">2022-11-10</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/10/%E5%88%9D%E8%AF%86pocsuite3%E6%A1%86%E6%9E%B6/" title="初始PocSuite3框架"><img src="/img/poc.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="初始PocSuite3框架"/></a><div class="content"><a class="title" href="/2022/11/10/%E5%88%9D%E8%AF%86pocsuite3%E6%A1%86%E6%9E%B6/" title="初始PocSuite3框架">初始PocSuite3框架</a><time datetime="2022-11-10T10:17:57.408Z" title="发表于 2022-11-10 18:17:57">2022-11-10</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/git_img.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Maxenton</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="/js/custom/custom.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
