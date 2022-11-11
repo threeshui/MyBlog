@@ -1,0 +1,261 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>代码审计工具 | Maxenton</title><meta name="author" content="Maxenton"><meta name="copyright" content="Maxenton"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="代码审计工具介绍。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="代码审计工具">
+<meta property="og:url" content="https://threeshui.github.io/2022/01/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%B7%A5%E5%85%B7/index.html">
+<meta property="og:site_name" content="Maxenton">
+<meta property="og:description" content="代码审计工具介绍。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://threeshui.github.io/img/daimatool_img.png">
+<meta property="article:published_time" content="2022-01-17T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-11T11:37:46.445Z">
+<meta property="article:author" content="Maxenton">
+<meta property="article:tag" content="信息安全">
+<meta property="article:tag" content="代码审计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://threeshui.github.io/img/daimatool_img.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://threeshui.github.io/2022/01/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%B7%A5%E5%85%B7/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2ec9fa90a95a4d6f2c1057f31b412d4a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Maxenton","link":"链接: ","source":"来源: Maxenton","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '代码审计工具',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-11 19:37:46'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/custom.css"><script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/daimatool_img.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Maxenton</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">代码审计工具</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-01-17T16:00:00.000Z" title="发表于 2022-01-18 00:00:00">2022-01-18</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-11T11:37:46.445Z" title="更新于 2022-11-11 19:37:46">2022-11-11</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="代码审计工具"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src="https://img-blog.csdnimg.cn/1fcf3868f39e45bea4506ffd1317d8d3.png" alt="在这里插入图片描述"><br>图片来源于百度图片。<br>&#x3D;&#x3D;注意：本篇文章仅用于自我学习，笔记记录，不得用于其他用途。&#x3D;&#x3D;</p>
+<h1 id="一、引子"><a href="#一、引子" class="headerlink" title="一、引子"></a>一、引子</h1><p>在攻方面，传统的黑盒模式是通过扫描器扫描站点或利用NDAY来渗透的方式已经受到了很大的制约，现在及未来的渗透测试发展方向是白盒测试 , 也就是代码审计 , 无论是挖0day还是企业渗透测试 , 白盒都是最快最准确的挖掘姿势拿到源代码–&gt;代码审计–&gt;利用审计出来的漏洞制定措施，所以代码审计能力也越发重要。<br>&#x3D;&#x3D;最好是工具和人工结合使用。&#x3D;&#x3D;</p>
+<h1 id="二、审计工具"><a href="#二、审计工具" class="headerlink" title="二、审计工具"></a>二、审计工具</h1><p>工欲善其事 必先利其器，使用自动化工具代替人工挖掘，可以显著提高审计工作的效率，学会利用自动化代码审计工具，是每个代码审计人员必备的技能<br>自动审计工具： </p>
+<ul>
+<li>RIPS  </li>
+<li>Seay </li>
+<li>fortify</li>
+</ul>
+<h1 id="三、代码审计环境搭建"><a href="#三、代码审计环境搭建" class="headerlink" title="三、代码审计环境搭建"></a>三、代码审计环境搭建</h1> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">phpstudy2018 + php5.4 + 留言板源码</span><br><span class="line">解压到www根目录</span><br><span class="line">修改cs.com\lib\config.php 数据库配置</span><br><span class="line">链接mysql数据库 , 创建数据库</span><br><span class="line">create database message;</span><br><span class="line">use message;</span><br><span class="line">source D:\\phpStudy\\PHPTutorial\\WWW\\cs.com\\lib\\test_message.sql;</span><br><span class="line">访问</span><br><span class="line">http://cs.com</span><br><span class="line">管理员/密码</span><br><span class="line">admin/admin</span><br></pre></td></tr></table></figure>
+<h1 id="四、RIPS"><a href="#四、RIPS" class="headerlink" title="四、RIPS"></a>四、RIPS</h1><p>它是一款开源的，具有较强的漏洞挖掘能力的自动化代码审计工具，由PHP语言编写，<strong>用于静态审计PHP代码</strong><br>也可以采用正则方式扫描代码发现漏洞；还能够采用自定义的语法扫描代码发现问题<br>官网：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://rips-scanner.sourceforge.net/</span><br></pre></td></tr></table></figure>
+<p>在这里插入图片描述</p>
+<p>解压下载的zip文件到Web服务器网站目录下即可。在浏览器中输入Web服务器地址和对应目录<br>主界面介绍：<br><img src="https://img-blog.csdnimg.cn/10708ac653e84fa289c71f7a8451110b.png" alt="在这里插入图片描述"></p>
+<table>
+<thead>
+<tr>
+<th>功能</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>subdirs</td>
+<td>如果勾选上这个选项，会扫描所有子目录，否则只扫描一级目录，缺省为勾选</td>
+</tr>
+<tr>
+<td>verbosity level</td>
+<td>选择扫描结果的详细程度，默认为1(建议就使用1)</td>
+</tr>
+<tr>
+<td>vuln type</td>
+<td>选择需要扫描的漏洞类型。支持命令注入、代码执行、SQL注入等十余种漏洞类型，默认为全部扫描</td>
+</tr>
+<tr>
+<td>code style</td>
+<td>选择扫描结果的显示风格（支持9种语法高亮）。</td>
+</tr>
+<tr>
+<td>&#x2F;regex&#x2F;</td>
+<td>使用正则表达式过滤结果</td>
+</tr>
+<tr>
+<td>path&#x2F;file</td>
+<td>要扫描的目录</td>
+</tr>
+<tr>
+<td>scan</td>
+<td>开始扫描</td>
+</tr>
+</tbody></table>
+<p>访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://rip.com/</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/c72eefe2ff134fb9853f980e73fd2b45.png" alt="在这里插入图片描述"></p>
+<p>实验 : 使用RIPS  对留言板源码进行扫描<br>访问<br>输入地址 , 开始扫描<br><img src="https://img-blog.csdnimg.cn/d9cd6b3fc70d40df81be33cf5c32afc7.png" alt="在这里插入图片描述"></p>
+<h2 id="1、xss漏洞"><a href="#1、xss漏洞" class="headerlink" title="1、xss漏洞"></a>1、xss漏洞</h2><p><img src="https://img-blog.csdnimg.cn/80bd9909124d4dd8860bd351052aafc8.png" alt="在这里插入图片描述"></p>
+<p>访问对应地址 , 抓包复现</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://cs.com/admin/index.php</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/963389c2499c4a85a7112c810e3231e1.png" alt="在这里插入图片描述"><br>修改之后 , 放过数据包<br><img src="https://img-blog.csdnimg.cn/img_convert/f41405589bf682b3a680b6844532eef0.png" alt="image-20220401163718257"><br>直接跳转到首页 , 复现失败 , 因为在index.php也会做一个cookie的校验<br>##	2、文件上传漏洞<br>路径</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">File: E:\phpstudy_pro\WWW\cs.com/admin/admin_check.php</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/cfe4ca7150b34dbbae3e99c15ee66f8a.png" alt="在这里插入图片描述"></p>
+<p>通过浏览网站发现只有修改头型 , 有上传点 , 测试</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://cs.com/user_edit.php</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/a2f94759fa0d41f49e39c168e9074aa9.png" alt="在这里插入图片描述"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://cs.com/upload/images/2022_09_20/Upload_2022_09_20_16_54_43_160791.php</span><br></pre></td></tr></table></figure>
+<p><img src="https://img-blog.csdnimg.cn/0565a5db2b2f4de381970f3e8a88925e.png" alt="在这里插入图片描述"></p>
+<p>存在任意文件上传 , 可以getshell , 查看源码</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">upFile</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">	<span class="variable">$dir</span> = PATH.<span class="string">&quot;/upload/images/&quot;</span>.<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y_m_d&#x27;</span>);</span><br><span class="line">	<span class="variable">$dir_bak</span> = <span class="string">&quot;/upload/images/&quot;</span>.<span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y_m_d&#x27;</span>);</span><br><span class="line">	<span class="title function_ invoke__">is_dir</span>(<span class="variable">$dir</span>) || <span class="title function_ invoke__">mkdir</span>(<span class="variable">$dir</span>,<span class="number">0777</span>,<span class="literal">true</span>);</span><br><span class="line">	<span class="variable">$fileName</span> = <span class="title function_ invoke__">date</span>(<span class="string">&#x27;Y_m_d_H_i_s&#x27;</span>, <span class="title function_ invoke__">time</span>()).<span class="string">&quot;_&quot;</span>.(<span class="title function_ invoke__">rand</span>(<span class="number">100000</span>,<span class="number">900000</span>));</span><br><span class="line">	<span class="variable">$fileType</span> = <span class="title function_ invoke__">strrchr</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;user_pic&quot;</span>][<span class="string">&quot;name&quot;</span>], <span class="string">&quot;.&quot;</span>);</span><br><span class="line">	<span class="variable">$fileName</span> = <span class="string">&quot;Upload_&quot;</span>.<span class="variable">$fileName</span>.<span class="variable">$fileType</span>;</span><br><span class="line">	<span class="variable">$destination</span> =  <span class="variable">$dir</span>.<span class="string">&quot;/&quot;</span>.<span class="variable">$fileName</span>;</span><br><span class="line">	<span class="title function_ invoke__">move_uploaded_file</span>(<span class="variable">$_FILES</span>[<span class="string">&quot;user_pic&quot;</span>][<span class="string">&quot;tmp_name&quot;</span>],<span class="variable">$destination</span>);</span><br><span class="line">	<span class="variable">$filePath</span>  = <span class="variable">$dir_bak</span>.<span class="string">&quot;/&quot;</span>.<span class="variable">$fileName</span>;</span><br><span class="line">	<span class="keyword">return</span> <span class="variable">$filePath</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>没有做任何的过滤和限制 , 直接拼接的文件后缀<br>&#x3D;&#x3D;这个工具挺喜欢echo的，碰到就报XSS。&#x3D;&#x3D;</p>
+<h1 id="五、Seay"><a href="#五、Seay" class="headerlink" title="五、Seay"></a>五、Seay</h1><p>软件介绍</p>
+<ul>
+<li>Seay代码审计 , 由阿里巴巴尹毅使用C#开发的针对PHP代码安全审计软件</li>
+<li>执行审计常见web安全漏洞，并且能够进行代码调试，函数定位，语法高亮等。</li>
+<li>运行在Windows系统上</li>
+</ul>
+<p>Seay实践： </p>
+<ol>
+<li>新建项目，打开源码文件夹，点击自动审计即可  </li>
+<li>误报可能会很多，扫描完成生成报告即可查看</li>
+</ol>
+<p><img src="https://img-blog.csdnimg.cn/d9076cafa2654a948c29999883ef920f.png" alt="在这里插入图片描述"></p>
+<p>实验 : 使用Seay源代码审计工具对留言板源码进行扫描</p>
+<h2 id="1、Exec命令执行"><a href="#1、Exec命令执行" class="headerlink" title="1、Exec命令执行"></a>1、Exec命令执行</h2><p>命令执行 Exec 函数  , 找到函数 , 右键定位 函数 , 发现是自定义函数 , 并不是命令执行 , 误报</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/a28aea14c9596daf875ec4a2cabe5f05.png" alt="image-20220401172728037"></p>
+<h2 id="2、sql注入"><a href="#2、sql注入" class="headerlink" title="2、sql注入"></a>2、sql注入</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/709ce37be8b5b01b1a531547d1464ed6.png" alt="image-20220401203835639"></p>
+<p>直接拼接的sql语句 , 变量值可控 , 存在sql注入漏洞 , 可以通过echo当前语句 , 直接查看sql语句</p>
+<p>接着又是 命令执行 Exec 函数 </p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/8b9c6e96fba15b61cc815f804ec173ed.png" alt="image-20220401204619485"></p>
+<p>误报</p>
+<h2 id="3、sql注入"><a href="#3、sql注入" class="headerlink" title="3、sql注入"></a>3、sql注入</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/5864099ca93063ed816ae1bdd8e4880a.png" alt="image-20220401204737937"></p>
+<p>直接拼接的sql语句 , 变量值可控 , 存在sql注入漏洞 , 可以通过echo当前语句 , 直接查看sql语句</p>
+<p>剩下的sql注入全是直接拼接的就不一个一个介绍了 , 然后Exec函数是误报</p>
+<h2 id="4、文件上传"><a href="#4、文件上传" class="headerlink" title="4、文件上传"></a>4、文件上传</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/7934f89d100447493ebe7aaa858de230.png" alt="image-20220401205043168"></p>
+<p>没有对文件名做任何的处理和过滤 , 可以直接上传webshell</p>
+<h2 id="5、伪造客户端ip"><a href="#5、伪造客户端ip" class="headerlink" title="5、伪造客户端ip"></a>5、伪造客户端ip</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/423c5f57e14e2b68cfc90ef34e754bdd.png" alt="image-20220401205325335"></p>
+<p>burp插件就可以演示 , 但是这个源码中没有调用这个函数的地方</p>
+<p>小总结</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Seay 感觉还不错  , 最起码sql注入可以检测出来 , 不会有xss误报 , 然后函数定位功能很好用</span><br><span class="line">缺点 : 逻辑漏洞无法检测 , 当然这也是工具的通病</span><br></pre></td></tr></table></figure>
+
+<h1 id="六、fortify"><a href="#六、fortify" class="headerlink" title="六、fortify"></a>六、fortify</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Fortify SCA ，是HP的产品 ，是一个静态的、白盒的软件源代码安全测试工具。</span><br><span class="line">它通过内置的五大主要分析引擎：数据流、语义、结构、控制流、配置流等对应</span><br><span class="line">用软件的源代码进行静态的分析，分析的过程中与它特有的软件安全漏洞规则集</span><br><span class="line">进行全面地匹配、查找，从而将源代码中存在的安全漏洞扫描出来，并给予整理</span><br><span class="line">报告。扫描的结果包含详细的安全漏洞信息、安全知识说明、修复意见。</span><br></pre></td></tr></table></figure>
+
+<p>Foritfy SCA</p>
+<p>主要包含的五大分析引擎 </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">数据流引擎 : 跟踪,记录并分析程序中的数据传递过程所产生的安全问题。</span><br><span class="line">语义引擎 : 分析程序中不安全的函数,方法的使用的安全问题。</span><br><span class="line">结构引擎 : 分析程序上下文环境,结构中的安全问题。</span><br><span class="line">控制流引擎 : 分析程序特定时间,状态下执行操作指令的安全问题。</span><br><span class="line">配置引擎 : 分析项目配置文件中的敏感信息和配置缺失的安全问题。</span><br></pre></td></tr></table></figure>
+
+<p>特有的X-Tir跟踪器 : 跨跃项目的上下层次,贯穿程序来综合分析问题</p>
+<p>支持的语言</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">1. asp.net     </span><br><span class="line">2. VB.Net     </span><br><span class="line">3. c#.Net     </span><br><span class="line">4. ASP     </span><br><span class="line">5. VBscript     </span><br><span class="line">6. VS6     </span><br><span class="line">7.java     </span><br><span class="line">8.JSP     </span><br><span class="line">9.javascript     </span><br><span class="line">10. HTML     </span><br><span class="line">11. XML     </span><br><span class="line">12. C/C++     </span><br><span class="line">13.PHP     </span><br><span class="line">14.T-SQL     </span><br><span class="line">15.PL/SQL     </span><br><span class="line">16. Action script      </span><br><span class="line">17. Object-C (iphone-2012/5)     </span><br><span class="line">18. ColdFusion5.0 - 选购     </span><br><span class="line">19. python -选购     </span><br><span class="line">20. COBOL - 选购     </span><br><span class="line">21.SAP-ABAP -选购</span><br></pre></td></tr></table></figure>
+
+<h2 id="1、导出报告"><a href="#1、导出报告" class="headerlink" title="1、导出报告"></a>1、导出报告</h2><p>点击tools-reports,有两种报告模式：Generate BIRT Report 和 Generate Legacy Report</p>
+<p>选择 Generate BIRT Report</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/c934fd4df19ca110ef322f57646285fa.png" alt="image-20220403121853769"></p>
+<p>不过默认导出的是英文报告 , 一般很少使用该功能</p>
+<h2 id="2、xss漏洞"><a href="#2、xss漏洞" class="headerlink" title="2、xss漏洞"></a>2、xss漏洞</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/0732804bfd97a03cedc91e2bf859c964.png" alt="image-20220403122439339"></p>
+<p>主要介绍工具如何使用 , 关于漏洞的分析 , 复现 , 前面已经搞过了 , 该漏洞是误报</p>
+<h2 id="3、弱口令"><a href="#3、弱口令" class="headerlink" title="3、弱口令"></a>3、弱口令</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/e5547988044762ead6eb476cfead841c.png" alt="image-20220403122639560"></p>
+<h2 id="4、文件上传-1"><a href="#4、文件上传-1" class="headerlink" title="4、文件上传"></a>4、文件上传</h2><p>工具扫出来提示的是 路径操控</p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/04ab31233da5359101a05cfc7e53526e.png" alt="image-20220403123255388"></p>
+<h2 id="5、sql注入"><a href="#5、sql注入" class="headerlink" title="5、sql注入"></a>5、sql注入</h2><p><img src="https://img-blog.csdnimg.cn/img_convert/8943910fccc9bdc8ce75f13e53b13623.png" alt="image-20220403123452857"></p>
+<p><img src="https://img-blog.csdnimg.cn/img_convert/0cdeae346f94948ab92e1743905b8e55.png" alt="image-20220403123529295"></p>
+<p>搜索行sql注入 , 可以看到是直接拼接的sql语句, 虽然有单引号保护 , 但是可以通过闭合单引号绕过</p>
+<h1 id="七、工具的不足"><a href="#七、工具的不足" class="headerlink" title="七、工具的不足"></a>七、工具的不足</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">工具本身存在一定量的误报或者漏报</span><br><span class="line">扫描结果需要大量人工确定甄别</span><br><span class="line">csrf, 越权, 逻辑漏洞等扫不到</span><br><span class="line">如用多种语言开发的软件，则需单独分析</span><br><span class="line"></span><br><span class="line">不能自动收集常见的代码安全问题</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://threeshui.github.io">Maxenton</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://threeshui.github.io/2022/01/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%B7%A5%E5%85%B7/">https://threeshui.github.io/2022/01/18/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%B7%A5%E5%85%B7/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://threeshui.github.io" target="_blank">Maxenton</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a><a class="post-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></div><div class="post_share"><div class="social-share" data-image="/img/daimatool_img.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/01/28/Python%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E4%BA%8C%EF%BC%89/"><img class="prev-cover" src="/img/python_img.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Python学习日记（二）</div></div></a></div><div class="next-post pull-right"><a href="/2022/01/13/Python%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E4%B8%80%EF%BC%89/"><img class="next-cover" src="/img/python_img.png" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Python学习日记（一）</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/12/31/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E5%9F%BA%E7%A1%80/" title="代码审计基础"><img class="cover" src="/img/daimajichu.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-12-31</div><div class="title">代码审计基础</div></div></a></div><div><a href="/2022/02/01/%E7%9A%AE%E5%8D%A1%E4%B8%98%E9%9D%B6%E5%9C%BA%E6%BA%90%E7%A0%81%E5%AE%A1%E8%AE%A1%EF%BC%88%E4%B8%80%EF%BC%89/" title="皮卡丘靶场源码审计（一）"><img class="cover" src="/img/pikachu1.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-01</div><div class="title">皮卡丘靶场源码审计（一）</div></div></a></div><div><a href="/2022/02/03/%E7%9A%AE%E5%8D%A1%E4%B8%98%E9%9D%B6%E5%9C%BA%E6%BA%90%E7%A0%81%E5%AE%A1%E8%AE%A1%EF%BC%88%E4%BA%8C%EF%BC%89/" title="皮卡丘靶场源码审计（二）"><img class="cover" src="/img/pikachu2.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-02-03</div><div class="title">皮卡丘靶场源码审计（二）</div></div></a></div><div><a href="/2021/10/20/BurpSuite%E5%B7%A5%E5%85%B7%E7%9A%84%E5%AD%A6%E4%B9%A0%E4%B8%8E%E4%BD%BF%E7%94%A8/" title="BurpSuite工具的学习与使用"><img class="cover" src="/img/burp01.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-10-20</div><div class="title">BurpSuite工具的学习与使用</div></div></a></div><div><a href="/2022/06/18/Cobalt%20Strike%E4%BD%93%E9%AA%8C/" title="Cobalt Strike体验"><img class="cover" src="/img/cs01.jpeg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-18</div><div class="title">Cobalt Strike体验</div></div></a></div><div><a href="/2021/11/01/Git%E7%9A%84%E5%BC%BA%E5%A4%A7/" title="Git的强大之处"><img class="cover" src="/img/git01.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-11-01</div><div class="title">Git的强大之处</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Maxenton</div><div class="author-info__description">一个啥都只会一点的白帽子</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">51</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">17</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15131581?spm=1030.2200.3001.5343"><i class="fab fa-cuttlefish"></i><span>CSDN欢迎关注</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/threeshui" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:peiyimiao@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_15131581?spm=1030.2200.3001.5343" target="_blank" title=""><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到这里，愿君所遇即所爱！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%BC%95%E5%AD%90"><span class="toc-number">1.</span> <span class="toc-text">一、引子</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%AE%A1%E8%AE%A1%E5%B7%A5%E5%85%B7"><span class="toc-number">2.</span> <span class="toc-text">二、审计工具</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA"><span class="toc-number">3.</span> <span class="toc-text">三、代码审计环境搭建</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%9B%9B%E3%80%81RIPS"><span class="toc-number">4.</span> <span class="toc-text">四、RIPS</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81xss%E6%BC%8F%E6%B4%9E"><span class="toc-number">4.1.</span> <span class="toc-text">1、xss漏洞</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%94%E3%80%81Seay"><span class="toc-number">5.</span> <span class="toc-text">五、Seay</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81Exec%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C"><span class="toc-number">5.1.</span> <span class="toc-text">1、Exec命令执行</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81sql%E6%B3%A8%E5%85%A5"><span class="toc-number">5.2.</span> <span class="toc-text">2、sql注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81sql%E6%B3%A8%E5%85%A5"><span class="toc-number">5.3.</span> <span class="toc-text">3、sql注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">5.4.</span> <span class="toc-text">4、文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81%E4%BC%AA%E9%80%A0%E5%AE%A2%E6%88%B7%E7%AB%AFip"><span class="toc-number">5.5.</span> <span class="toc-text">5、伪造客户端ip</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%AD%E3%80%81fortify"><span class="toc-number">6.</span> <span class="toc-text">六、fortify</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%AF%BC%E5%87%BA%E6%8A%A5%E5%91%8A"><span class="toc-number">6.1.</span> <span class="toc-text">1、导出报告</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81xss%E6%BC%8F%E6%B4%9E"><span class="toc-number">6.2.</span> <span class="toc-text">2、xss漏洞</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E5%BC%B1%E5%8F%A3%E4%BB%A4"><span class="toc-number">6.3.</span> <span class="toc-text">3、弱口令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0-1"><span class="toc-number">6.4.</span> <span class="toc-text">4、文件上传</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5%E3%80%81sql%E6%B3%A8%E5%85%A5"><span class="toc-number">6.5.</span> <span class="toc-text">5、sql注入</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E5%B7%A5%E5%85%B7%E7%9A%84%E4%B8%8D%E8%B6%B3"><span class="toc-number">7.</span> <span class="toc-text">七、工具的不足</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/13/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/" title="Git推送本地到库鉴权失败"><img src="/img/git_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git推送本地到库鉴权失败"/></a><div class="content"><a class="title" href="/2022/10/13/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/" title="Git推送本地到库鉴权失败">Git推送本地到库鉴权失败</a><time datetime="2022-10-12T16:00:00.000Z" title="发表于 2022-10-13 00:00:00">2022-10-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/13/Yunzai-Bot%E6%8F%92%E4%BB%B6%E4%B8%ADpip%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93%E6%8A%A5%E9%94%99/" title="Yunzai-Bot插件中pip命令安装报错"><img src="/img/yunzai_img.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Yunzai-Bot插件中pip命令安装报错"/></a><div class="content"><a class="title" href="/2022/09/13/Yunzai-Bot%E6%8F%92%E4%BB%B6%E4%B8%ADpip%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93%E6%8A%A5%E9%94%99/" title="Yunzai-Bot插件中pip命令安装报错">Yunzai-Bot插件中pip命令安装报错</a><time datetime="2022-09-12T16:00:00.000Z" title="发表于 2022-09-13 00:00:00">2022-09-13</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/04/%E9%92%93%E9%B1%BC%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99/" title="钓鱼软件的编写"><img src="/img/fishing.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="钓鱼软件的编写"/></a><div class="content"><a class="title" href="/2022/09/04/%E9%92%93%E9%B1%BC%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99/" title="钓鱼软件的编写">钓鱼软件的编写</a><time datetime="2022-09-03T16:00:00.000Z" title="发表于 2022-09-04 00:00:00">2022-09-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/14/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E7%A0%94%E7%A9%B6%E2%80%94%E2%80%94ensp%E9%85%8D%E7%BD%AE%E6%97%81%E6%8C%82%E4%B8%89%E5%B1%82%E7%BB%84%E7%BD%91%E7%A4%BA%E4%BE%8B%E3%80%90OSPF+%E4%B8%A4%E4%B8%AA%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9CWPAPSK%E8%AE%A4%E8%AF%81+DHCP%E3%80%91/" title="ensp配置旁挂三层组网示例"><img src="/img/ensp_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="ensp配置旁挂三层组网示例"/></a><div class="content"><a class="title" href="/2022/08/14/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E7%A0%94%E7%A9%B6%E2%80%94%E2%80%94ensp%E9%85%8D%E7%BD%AE%E6%97%81%E6%8C%82%E4%B8%89%E5%B1%82%E7%BB%84%E7%BD%91%E7%A4%BA%E4%BE%8B%E3%80%90OSPF+%E4%B8%A4%E4%B8%AA%E6%97%A0%E7%BA%BF%E7%BD%91%E7%BB%9CWPAPSK%E8%AE%A4%E8%AF%81+DHCP%E3%80%91/" title="ensp配置旁挂三层组网示例">ensp配置旁挂三层组网示例</a><time datetime="2022-08-13T16:00:00.000Z" title="发表于 2022-08-14 00:00:00">2022-08-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/08/04/Python%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E7%BB%88%EF%BC%89/" title="Python学习日记（终）"><img src="/img/python_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Python学习日记（终）"/></a><div class="content"><a class="title" href="/2022/08/04/Python%E5%AD%A6%E4%B9%A0%E6%97%A5%E8%AE%B0%EF%BC%88%E7%BB%88%EF%BC%89/" title="Python学习日记（终）">Python学习日记（终）</a><time datetime="2022-08-03T16:00:00.000Z" title="发表于 2022-08-04 00:00:00">2022-08-04</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/daimatool_img.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Maxenton</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="/js/custom/custom.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
